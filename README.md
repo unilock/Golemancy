@@ -2,7 +2,7 @@
 
 # Golemancy
 
-Golemancy is a mod about capturing the souls of mobs, breeding them, and using them to create faithful golem servants to do your bidding. You can create golems that will fight for you, gather items, and otherwise automate your Minecraft world! This mod is for Fabric, and no Forge port is currently planned.
+Golemancy is a mod about capturing the souls of mobs, breeding them, and using them to create faithful golem servants to do your bidding. You can create golems that will fight for you, gather items, and otherwise automate your Minecraft world!
 
 ![dyed terracotta golems](/readme/terracotta-dyed.png)
 
