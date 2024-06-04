@@ -49,13 +49,12 @@ public class GolemDanceGoal extends Goal {
 
     public boolean canHearMusic() {
         float searchRadius = ConfigurationHandler.getGolemRadius();
-        ServerWorld world = (ServerWorld) this.entity.world;
+        ServerWorld world = (ServerWorld) this.entity.getWorld();
         BlockPos pos = this.entity.getBlockPos();
         float r = searchRadius + (searchRadius * entity.getGolemSmarts());
         for (BlockPos curPos : BlockPos.iterateOutwards(pos, (int) r, (int) r, (int) r)) {
-            if (world.getBlockEntity(curPos) instanceof JukeboxBlockEntity) {
-                JukeboxBlockEntity entity = (JukeboxBlockEntity) world.getBlockEntity(curPos);
-                if (!entity.getRecord().isEmpty() && (entity.getRecord().getItem() instanceof MusicDiscItem)) {
+            if (world.getBlockEntity(curPos) instanceof JukeboxBlockEntity jukebox) {
+                if (!jukebox.getItem().isEmpty() && (jukebox.getItem().getItem() instanceof MusicDiscItem)) {
                     this.targetPos = curPos;
                     return true;
                 }

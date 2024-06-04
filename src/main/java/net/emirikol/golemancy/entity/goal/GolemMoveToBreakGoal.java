@@ -33,15 +33,15 @@ public abstract class GolemMoveToBreakGoal extends GolemMoveGoal {
                 this.breakProgress++;
                 int i = (int) ((float) this.breakProgress / (float) this.getMaxProgress() * 10.0F);
                 if (i != this.prevBreakProgress) {
-                    this.entity.world.setBlockBreakingInfo(this.entity.getId(), this.targetPos, i);
+                    this.entity.getWorld().setBlockBreakingInfo(this.entity.getId(), this.targetPos, i);
                     this.prevBreakProgress = i;
                 }
 
                 if (this.breakProgress == this.getMaxProgress()) {
-                    this.entity.world.breakBlock(this.targetPos, true);
+                    this.entity.getWorld().breakBlock(this.targetPos, true);
                     this.breakProgress = 0;
                     this.prevBreakProgress = 0;
-                    this.entity.world.syncWorldEvent(2001, this.targetPos, Block.getRawIdFromState(this.entity.world.getBlockState(this.targetPos)));
+                    this.entity.getWorld().syncWorldEvent(2001, this.targetPos, Block.getRawIdFromState(this.entity.getWorld().getBlockState(this.targetPos)));
                 }
             } else if (this.entity.getRandom().nextInt(20) == 0) {
                 //Frustration particle if block can't be broken.
@@ -80,11 +80,11 @@ public abstract class GolemMoveToBreakGoal extends GolemMoveGoal {
 
     public boolean canBreak(BlockPos pos) {
         //Check if we are strong enough to break a block.
-        BlockState state = this.entity.world.getBlockState(pos);
+        BlockState state = this.entity.getWorld().getBlockState(pos);
         if (state == null) {
             return false;
         }
-        float hardness = state.getHardness(this.entity.world, pos);
+        float hardness = state.getHardness(this.entity.getWorld(), pos);
         return (hardness >= 0) && (hardness <= getBreakingStrength()) && !state.isAir();
     }
 

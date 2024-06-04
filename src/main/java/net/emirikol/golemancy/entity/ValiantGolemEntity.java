@@ -1,10 +1,13 @@
 package net.emirikol.golemancy.entity;
 
-import net.emirikol.golemancy.Golemancy;
 import net.emirikol.golemancy.entity.goal.GolemExtractToolGoal;
 import net.emirikol.golemancy.registry.GMEntityTypes;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.AttackWithOwnerGoal;
+import net.minecraft.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.entity.ai.goal.RevengeGoal;
+import net.minecraft.entity.ai.goal.TargetGoal;
+import net.minecraft.entity.ai.goal.TrackOwnerAttackerGoal;
 import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.Monster;

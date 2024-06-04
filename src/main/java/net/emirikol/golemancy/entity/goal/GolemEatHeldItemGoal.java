@@ -29,7 +29,7 @@ public class GolemEatHeldItemGoal extends Goal {
     public void tick() {
         if (!this.isEating()) {
             entity.equipStack(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
-            entity.world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), entity.getEatSound(entity.getEquippedStack(EquipmentSlot.MAINHAND)), SoundCategory.NEUTRAL, 1.0F, 1.0F + (entity.world.random.nextFloat() - entity.world.random.nextFloat()) * 0.4F);
+            entity.getWorld().playSound(null, entity.getX(), entity.getY(), entity.getZ(), entity.getEatSound(entity.getEquippedStack(EquipmentSlot.MAINHAND)), SoundCategory.NEUTRAL, 1.0F, 1.0F + (entity.getWorld().random.nextFloat() - entity.getWorld().random.nextFloat()) * 0.4F);
         } else {
             this.eatingTimer--;
             if (this.eatingTimer % 5 == 0) {

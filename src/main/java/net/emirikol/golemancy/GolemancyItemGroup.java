@@ -4,24 +4,28 @@ import net.emirikol.golemancy.genetics.Genome;
 import net.emirikol.golemancy.genetics.Genomes;
 import net.emirikol.golemancy.genetics.SoulTypes;
 import net.emirikol.golemancy.registry.GMObjects;
-import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.text.Text;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class GolemancyItemGroup {
-    public static final ItemGroup GOLEMANCY_ITEM_GROUP = FabricItemGroupBuilder.create(new GMIdentifier("golemancy_items"))
+    public static final ItemGroup GOLEMANCY_ITEM_GROUP = FabricItemGroup.builder()
+                .name(Text.literal("itemGroup.golemancy.golemancy_items"))
                 .icon(() -> new ItemStack(GMObjects.CLAY_EFFIGY))
-                .appendItems(stacks -> {
-                    stacks.add(new ItemStack(GMObjects.SOUL_MIRROR));
-                    stacks.add(new ItemStack(GMObjects.SOUL_GRAFTER));
-                    stacks.add(new ItemStack(GMObjects.GOLEM_WAND));
-                    stacks.add(new ItemStack(GMObjects.CLAY_EFFIGY));
-                    stacks.add(new ItemStack(GMObjects.TERRACOTTA_EFFIGY));
-                    stacks.add(new ItemStack(GMObjects.OBSIDIAN_EFFIGY));
-                    stacks.add(new ItemStack(GMObjects.SOULSTONE_EMPTY));
+                .entries((parameters, stacks) -> {
+                    stacks.addStack(new ItemStack(GMObjects.SOUL_MIRROR));
+                    stacks.addStack(new ItemStack(GMObjects.SOUL_GRAFTER));
+                    stacks.addStack(new ItemStack(GMObjects.GOLEM_WAND));
+                    stacks.addStack(new ItemStack(GMObjects.CLAY_EFFIGY));
+                    stacks.addStack(new ItemStack(GMObjects.TERRACOTTA_EFFIGY));
+                    stacks.addStack(new ItemStack(GMObjects.OBSIDIAN_EFFIGY));
+                    stacks.addStack(new ItemStack(GMObjects.SOULSTONE_EMPTY));
                     List<Genome> genomes = Arrays.asList(
                             //Natural genomes
                             Genomes.creativeGenome(SoulTypes.COVETOUS),
@@ -44,7 +48,11 @@ public class GolemancyItemGroup {
                     for (Genome genome : genomes) {
                         ItemStack stack = new ItemStack(GMObjects.SOULSTONE_FILLED);
                         genome.toItemStack(stack);
-                        stacks.add(stack);
+                        stacks.addStack(stack);
                     }
                 }).build();
+
+    public static void register() {
+        Registry.register(Registries.ITEM_GROUP, new GMIdentifier("golemancy_items"), GOLEMANCY_ITEM_GROUP);
+    }
 }

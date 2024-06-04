@@ -1,25 +1,22 @@
 package net.emirikol.golemancy.entity;
 
 import com.mojang.authlib.GameProfile;
+import net.fabricmc.fabric.api.entity.FakePlayer;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
-import net.minecraft.network.encryption.PlayerPublicKey;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
-public class FakePlayerEntity extends PlayerEntity {
-
-    public FakePlayerEntity(World world, BlockPos pos, float yaw, GameProfile gameProfile, @Nullable PlayerPublicKey publicKey) {
-        super(world, pos, yaw, gameProfile, publicKey);
+public class FakePlayerEntity extends FakePlayer {
+    protected FakePlayerEntity(ServerWorld world, GameProfile profile) {
+        super(world, profile);
     }
 
     public boolean isCreative() {
@@ -43,7 +40,7 @@ public class FakePlayerEntity extends PlayerEntity {
     }
 
     public ActionResult useBlock(BlockPos pos) {
-        BlockState state = this.world.getBlockState(pos);
+        BlockState state = this.getWorld().getBlockState(pos);
         BlockHitResult hit = new BlockHitResult(new Vec3d(pos.getX(), pos.getY(), pos.getZ()), Direction.UP, pos, false);
         //First, try using the held item on the block.
         ItemUsageContext context = new ItemUsageContext(this, this.getActiveHand(), hit);
@@ -51,7 +48,7 @@ public class FakePlayerEntity extends PlayerEntity {
         ActionResult result = stack.getItem().useOnBlock(context);
         if (result == ActionResult.PASS) {
             //If that doesn't do anything, try just using the block.
-            return state.getBlock().onUse(state, this.world, pos, this, this.getActiveHand(), hit);
+            return state.getBlock().onUse(state, this.getWorld(), pos, this, this.getActiveHand(), hit);
         } else {
             return result;
         }

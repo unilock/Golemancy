@@ -1,7 +1,12 @@
 package net.emirikol.golemancy.test;
 
-import net.emirikol.golemancy.Golemancy;
-import net.emirikol.golemancy.genetics.*;
+import net.emirikol.golemancy.genetics.Gene;
+import net.emirikol.golemancy.genetics.Genome;
+import net.emirikol.golemancy.genetics.Genomes;
+import net.emirikol.golemancy.genetics.Mutation;
+import net.emirikol.golemancy.genetics.SerializedGenome;
+import net.emirikol.golemancy.genetics.SoulType;
+import net.emirikol.golemancy.genetics.SoulTypes;
 import net.emirikol.golemancy.registry.GMObjects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;

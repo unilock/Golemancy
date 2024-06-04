@@ -28,12 +28,12 @@ public class GolemDepositHeldItemGoal extends Goal {
     public void tick() {
         ItemStack stack = this.entity.getEquippedStack(EquipmentSlot.MAINHAND);
         GolemHelper.tryInsert(stack, this.container);
-        this.entity.world.playSound(null, this.entity.getBlockPos(), SoundEvents.ITEM_BUNDLE_INSERT, SoundCategory.NEUTRAL, 1F, 1F);
+        this.entity.getWorld().playSound(null, this.entity.getBlockPos(), SoundEvents.ITEM_BUNDLE_INSERT, SoundCategory.NEUTRAL, 1F, 1F);
     }
 
     private boolean linkedBlockIsContainer() {
         BlockPos pos = this.entity.getLinkedBlockPos();
-        ServerWorld world = (ServerWorld) this.entity.world;
+        ServerWorld world = (ServerWorld) this.entity.getWorld();
         if (pos == null) {
             return false;
         }

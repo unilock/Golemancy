@@ -87,8 +87,8 @@ public class Genome {
     public void toItemStack(ItemStack stack) {
         NbtCompound nbt = stack.getOrCreateNbt();
         Gene<SoulType> type = this.getSoulType("type");
-        nbt.putString("type_active", type.getActive().getTypeString());
-        nbt.putString("type_dormant", type.getDormant().getTypeString());
+        nbt.putString("type_active", type.getActive().typeString());
+        nbt.putString("type_dormant", type.getDormant().typeString());
         Gene<Integer> potency = this.getInteger("potency");
         nbt.putInt("potency_active", potency.getActive());
         nbt.putInt("potency_dormant", potency.getDormant());

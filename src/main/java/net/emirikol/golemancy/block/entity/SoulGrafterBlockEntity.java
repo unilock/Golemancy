@@ -121,19 +121,19 @@ public class SoulGrafterBlockEntity extends BlockEntity implements ImplementedSi
     public boolean isValid(int slot, ItemStack stack) {
         //You can insert filled soulstones into parent slots.
         for (int i : PARENT_SLOTS) {
-            if ((slot == i) && (stack.isItemEqual(new ItemStack(GMObjects.SOULSTONE_FILLED)))) {
+            if ((slot == i) && (stack.isOf(GMObjects.SOULSTONE_FILLED))) {
                 return true;
             }
         }
         //You can insert empty soulstones into empty soulstone slots.
         for (int i : EMPTYSTONE_SLOTS) {
-            if ((slot == i) && (stack.isItemEqual(new ItemStack(GMObjects.SOULSTONE_EMPTY)))) {
+            if ((slot == i) && (stack.isOf(GMObjects.SOULSTONE_EMPTY))) {
                 return true;
             }
         }
         //You can insert fuel into fuel slots.
         for (int i : FUEL_SLOTS) {
-            if ((slot == i) && (stack.isItemEqual(new ItemStack(Items.BONE_MEAL)))) {
+            if ((slot == i) && (stack.isOf(Items.BONE_MEAL))) {
                 return true;
             }
         }
@@ -168,7 +168,7 @@ public class SoulGrafterBlockEntity extends BlockEntity implements ImplementedSi
                 return true;
             }
             //Check if the given output slot matches and has room.
-            if ((ItemStack.areNbtEqual(outputStack, stack)) && (ItemStack.areItemsEqual(outputStack, stack)) && (outputStack.getCount() < outputStack.getMaxCount())) {
+            if ((ItemStack.canCombine(outputStack, stack)) && (outputStack.getCount() < outputStack.getMaxCount())) {
                 outputStack.increment(1);
                 this.setStack(i, outputStack);
                 this.markDirty();

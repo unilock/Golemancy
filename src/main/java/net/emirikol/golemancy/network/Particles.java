@@ -1,10 +1,6 @@
 package net.emirikol.golemancy.network;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.emirikol.golemancy.GMIdentifier;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
@@ -18,11 +14,15 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.random.RandomGenerator;
+import org.quiltmc.loader.api.minecraft.ClientOnly;
+import org.quiltmc.qsl.networking.api.PacketByteBufs;
+import org.quiltmc.qsl.networking.api.PlayerLookup;
+import org.quiltmc.qsl.networking.api.ServerPlayNetworking;
 
 public class Particles {
-    public static final Identifier HEAL_PARTICLE_ID = new Identifier("golemancy", "heal_particle");
-    public static final Identifier SMOKE_PARTICLE_ID = new Identifier("golemancy", "smoke_particle");
-    public static final Identifier FOOD_PARTICLE_ID = new Identifier("golemancy", "food_particle");
+    public static final Identifier HEAL_PARTICLE_ID = new GMIdentifier("heal_particle");
+    public static final Identifier SMOKE_PARTICLE_ID = new GMIdentifier("smoke_particle");
+    public static final Identifier FOOD_PARTICLE_ID = new GMIdentifier("food_particle");
 
     public static void healParticle(LivingEntity target) {
         if (target == null) {
@@ -32,7 +32,7 @@ public class Particles {
         PacketByteBuf buf = PacketByteBufs.create();
         buf.writeBlockPos(target.getBlockPos());
 
-        for (ServerPlayerEntity user : PlayerLookup.tracking((ServerWorld) target.world, target.getBlockPos())) {
+        for (ServerPlayerEntity user : PlayerLookup.tracking((ServerWorld) target.getWorld(), target.getBlockPos())) {
             ServerPlayNetworking.send(user, HEAL_PARTICLE_ID, buf);
         }
     }
@@ -45,7 +45,7 @@ public class Particles {
         PacketByteBuf buf = PacketByteBufs.create();
         buf.writeBlockPos(target.getBlockPos());
 
-        for (ServerPlayerEntity user : PlayerLookup.tracking((ServerWorld) target.world, target.getBlockPos())) {
+        for (ServerPlayerEntity user : PlayerLookup.tracking((ServerWorld) target.getWorld(), target.getBlockPos())) {
             ServerPlayNetworking.send(user, SMOKE_PARTICLE_ID, buf);
         }
     }
@@ -59,12 +59,12 @@ public class Particles {
         buf.writeBlockPos(target.getBlockPos());
         buf.writeVarInt(target.getId());
 
-        for (ServerPlayerEntity user : PlayerLookup.tracking((ServerWorld) target.world, target.getBlockPos())) {
+        for (ServerPlayerEntity user : PlayerLookup.tracking((ServerWorld) target.getWorld(), target.getBlockPos())) {
             ServerPlayNetworking.send(user, FOOD_PARTICLE_ID, buf);
         }
     }
 
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     public static void spawnHealParticle(BlockPos pos) {
         assert MinecraftClient.getInstance().world != null;
         RandomGenerator rand = MinecraftClient.getInstance().world.getRandom();
@@ -80,7 +80,7 @@ public class Particles {
         }
     }
 
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     public static void spawnSmokeParticle(BlockPos pos) {
         assert MinecraftClient.getInstance().world != null;
         RandomGenerator rand = MinecraftClient.getInstance().world.getRandom();
@@ -96,7 +96,7 @@ public class Particles {
         }
     }
 
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     public static void spawnFoodParticle(BlockPos pos, Entity entity) {
         assert MinecraftClient.getInstance().world != null;
         RandomGenerator rand =  MinecraftClient.getInstance().world.getRandom();

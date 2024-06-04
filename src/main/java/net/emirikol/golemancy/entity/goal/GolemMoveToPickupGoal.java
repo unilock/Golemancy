@@ -31,12 +31,12 @@ public class GolemMoveToPickupGoal extends GolemMoveGoal {
     @Override
     public void tick() {
         //Check if there is an item within 1.5 blocks and the golem's hand is empty.
-        List<ItemEntity> list = entity.world.getEntitiesByClass(ItemEntity.class, entity.getBoundingBox().expand(PICKUP_RANGE, PICKUP_RANGE, PICKUP_RANGE), (entity) -> this.canPickUp(entity));
+        List<ItemEntity> list = entity.getWorld().getEntitiesByClass(ItemEntity.class, entity.getBoundingBox().expand(PICKUP_RANGE, PICKUP_RANGE, PICKUP_RANGE), (entity) -> this.canPickUp(entity));
         if (!list.isEmpty() && entity.getEquippedStack(EquipmentSlot.MAINHAND).isEmpty()) {
             //Take 1 item from the stack.
             ItemStack stack = list.get(0).getStack();
             entity.equipStack(EquipmentSlot.MAINHAND, stack.split(1));
-            this.entity.world.playSound(null, this.entity.getBlockPos(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.NEUTRAL, 1F, 1F);
+            this.entity.getWorld().playSound(null, this.entity.getBlockPos(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.NEUTRAL, 1F, 1F);
         }
         //Continue towards targetPos.
         super.tick();
@@ -46,7 +46,7 @@ public class GolemMoveToPickupGoal extends GolemMoveGoal {
     public boolean findTargetPos() {
         float searchRadius = ConfigurationHandler.getGolemRadius();
         float r = searchRadius + (searchRadius * entity.getGolemSmarts());
-        List<ItemEntity> list = entity.world.getEntitiesByClass(ItemEntity.class, entity.getBoundingBox().expand(r, this.maxYDifference, r), (entity) -> this.canPickUp(entity));
+        List<ItemEntity> list = entity.getWorld().getEntitiesByClass(ItemEntity.class, entity.getBoundingBox().expand(r, this.maxYDifference, r), (entity) -> this.canPickUp(entity));
         if (list.isEmpty()) {
             return false;
         }

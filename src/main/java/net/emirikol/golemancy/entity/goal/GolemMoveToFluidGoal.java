@@ -40,7 +40,7 @@ public class GolemMoveToFluidGoal extends GolemMoveGoal {
 
     @Override
     public boolean isTargetPos(BlockPos pos) {
-        ServerWorld world = (ServerWorld) this.entity.world;
+        ServerWorld world = (ServerWorld) this.entity.getWorld();
         FluidState fluidState = world.getBlockState(pos).getFluidState();
         ItemStack vessel = this.entity.getEquippedStack(EquipmentSlot.MAINHAND);
 

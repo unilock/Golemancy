@@ -45,7 +45,7 @@ public class GolemExtractItemToSortGoal extends GolemExtractItemGoal {
         List<Inventory> output = new ArrayList<>();
         float searchRadius = ConfigurationHandler.getGolemRadius();
 
-        ServerWorld world = (ServerWorld) this.entity.world;
+        ServerWorld world = (ServerWorld) this.entity.getWorld();
         BlockPos linkedBlockPos = this.entity.getLinkedBlockPos();
         if (linkedBlockPos == null) {
             return output;

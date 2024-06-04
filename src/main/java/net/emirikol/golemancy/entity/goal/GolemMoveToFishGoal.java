@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.LootTables;
-import net.minecraft.loot.context.LootContext;
+import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.server.world.ServerWorld;
@@ -60,7 +60,7 @@ public class GolemMoveToFishGoal extends GolemMoveGoal {
 
     @Override
     public boolean isTargetPos(BlockPos pos) {
-        ServerWorld world = (ServerWorld) this.entity.world;
+        ServerWorld world = (ServerWorld) this.entity.getWorld();
         FluidState fluidState = world.getBlockState(pos).getFluidState();
         return (fluidState.getFluid() == Fluids.WATER) && fluidState.isSource() && !fluidState.isEmpty() && super.isTargetPos(pos);
     }
@@ -84,17 +84,16 @@ public class GolemMoveToFishGoal extends GolemMoveGoal {
     }
 
     public void fish(BlockPos pos) {
-        ServerWorld world = (ServerWorld) this.entity.world;
+        ServerWorld world = (ServerWorld) this.entity.getWorld();
         ItemStack stack = this.entity.getEquippedStack(EquipmentSlot.MAINHAND);
 
         Vec3d originPos = new Vec3d(pos.getX(), pos.getY(), pos.getZ());
-        LootContext.Builder builder = new LootContext.Builder(world)
-                .parameter(LootContextParameters.ORIGIN, originPos)
-                .parameter(LootContextParameters.TOOL, stack)
-                .parameter(LootContextParameters.THIS_ENTITY, this.entity)
-                .random(this.entity.getRandom())
-                .luck(this.entity.getLuckFromSmarts() + EnchantmentHelper.getLuckOfTheSea(stack)); //Each level of Smarts adds 1 point of luck.
-        LootTable lootTable = world.getServer().getLootManager().getTable(LootTables.FISHING_GAMEPLAY);
+        LootContextParameterSet.Builder builder = new LootContextParameterSet.Builder(world)
+                .add(LootContextParameters.ORIGIN, originPos)
+                .add(LootContextParameters.TOOL, stack)
+                .add(LootContextParameters.THIS_ENTITY, this.entity)
+                .withLuck(this.entity.getLuckFromSmarts() + EnchantmentHelper.getLuckOfTheSea(stack)); //Each level of Smarts adds 1 point of luck.
+        LootTable lootTable = world.getServer().getLootManager().getLootTable(LootTables.FISHING_GAMEPLAY);
         List<ItemStack> list = lootTable.generateLoot(builder.build(LootContextTypes.FISHING));
         for (ItemStack fishy : list) {
             ItemEntity itemEntity = new ItemEntity(world, this.entity.getX(), this.entity.getY(), this.entity.getZ(), fishy);

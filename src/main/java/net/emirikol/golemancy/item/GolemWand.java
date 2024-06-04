@@ -6,7 +6,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.NbtCompound;
@@ -24,18 +23,18 @@ public class GolemWand extends Item {
     private static final double TELEPORT_RANGE = 120.0D;
 
     public GolemWand(Settings settings) {
-        super(settings.group(ItemGroup.SEARCH));
+        // TODO: .group(ItemGroup.SEARCH)
+        super(settings);
 
     }
 
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         //Used on a golem, it toggles their follow status. If you're sneaking, it starts linking the golem.
-        if (user.world.isClient()) {
+        if (user.getWorld().isClient()) {
             return ActionResult.PASS;
         }
-        if (entity instanceof AbstractGolemEntity) {
-            AbstractGolemEntity golemEntity = (AbstractGolemEntity) entity;
+        if (entity instanceof AbstractGolemEntity golemEntity) {
             if (golemEntity.isOwner(user)) {
                 if (user.isSneaking()) {
                     return startLinking(golemEntity, user, hand);
@@ -51,7 +50,7 @@ public class GolemWand extends Item {
     public ActionResult useOnBlock(ItemUsageContext context) {
         //Used on a block, it links a golem to it.
         PlayerEntity user = context.getPlayer();
-        if ((user == null) || (user.world.isClient())) {
+        if ((user == null) || (user.getWorld().isClient())) {
             return ActionResult.PASS;
         }
         ServerWorld world = (ServerWorld) context.getWorld();
@@ -61,21 +60,20 @@ public class GolemWand extends Item {
         int identifier = nbt.getInt("golem_id");
         if (identifier != 0) {
             Entity entity = world.getEntityById(identifier);
-            if (entity instanceof AbstractGolemEntity) {
-                AbstractGolemEntity golemEntity = (AbstractGolemEntity) entity;
+            if (entity instanceof AbstractGolemEntity golemEntity) {
                 if (golemEntity.isOwner(user)) {
                     return finishLinking(golemEntity, stack, pos, user, world);
                 }
             }
         }
         //If you're not in linking mode, using the wand on a block will teleport all following golems to you.
-        List<AbstractGolemEntity> golems = user.world.getEntitiesByClass(AbstractGolemEntity.class, user.getBoundingBox().expand(TELEPORT_RANGE, TELEPORT_RANGE, TELEPORT_RANGE), (entity) -> (entity.isOwner(user) && entity.isFollowingWand()));
+        List<AbstractGolemEntity> golems = user.getWorld().getEntitiesByClass(AbstractGolemEntity.class, user.getBoundingBox().expand(TELEPORT_RANGE, TELEPORT_RANGE, TELEPORT_RANGE), (entity) -> (entity.isOwner(user) && entity.isFollowingWand()));
         boolean teleported = false;
         for (AbstractGolemEntity golem : golems) {
             if (GolemHelper.tryTeleportTo(golem, user)) teleported = true;
         }
         if (teleported) {
-            user.world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.NEUTRAL, 1.5F, 1.0F + (user.world.random.nextFloat() - user.world.random.nextFloat()) * 0.4F);
+            user.getWorld().playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.NEUTRAL, 1.5F, 1.0F + (user.getWorld().random.nextFloat() - user.getWorld().random.nextFloat()) * 0.4F);
         }
         return ActionResult.SUCCESS;
     }

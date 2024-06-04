@@ -5,10 +5,10 @@ import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry.Gui.Tooltip;
 import net.emirikol.golemancy.Golemancy;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.PacketByteBuf;
+import org.quiltmc.qsl.networking.api.PacketByteBufs;
+import org.quiltmc.qsl.networking.api.ServerPlayConnectionEvents;
+import org.quiltmc.qsl.networking.api.ServerPlayNetworking;
 
 @Config(name = "golemancy")
 public class ConfigurationHandler implements ConfigData {
@@ -36,7 +36,7 @@ public class ConfigurationHandler implements ConfigData {
             buf.writeDouble(config.GOLEM_ARMOR_VALUE);
             buf.writeInt(config.GOLEM_AI_COOLDOWN);
             buf.writeInt(config.GOLEM_AI_RADIUS);
-            ServerPlayNetworking.send(handler.player, Golemancy.ConfigPacketID, buf);
+            ServerPlayNetworking.send(handler.player, Golemancy.CONFIG_PACKET_ID, buf);
         });
     }
 

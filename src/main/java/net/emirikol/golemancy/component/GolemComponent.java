@@ -7,16 +7,16 @@ import net.emirikol.golemancy.entity.GolemMaterial;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class GolemComponent implements ComponentV3, AutoSyncedComponent {
 
-    private final Map<String, Integer> attributes = new HashMap<String, Integer>() {{
+    private final Map<String, Integer> attributes = new HashMap<>() {{
         put("strength", 0);
         put("agility", 0);
         put("vigor", 0);
@@ -92,7 +92,7 @@ public class GolemComponent implements ComponentV3, AutoSyncedComponent {
 
         String linkIdString = nbt.getString("golemancy_linked_block");
         Identifier linkId = new Identifier(linkIdString);
-        if (Registry.BLOCK.get(linkId) != Blocks.AIR) this.linkedBlock = Registry.BLOCK.get(linkId);
+        if (Registries.BLOCK.get(linkId) != Blocks.AIR) this.linkedBlock = Registries.BLOCK.get(linkId);
 
         int materialID = nbt.getInt("golemancy_material");
         switch (materialID) {
@@ -127,7 +127,7 @@ public class GolemComponent implements ComponentV3, AutoSyncedComponent {
         }
 
         if (this.linkedBlock != null) {
-            Identifier linkId = Registry.BLOCK.getId(this.linkedBlock);
+            Identifier linkId = Registries.BLOCK.getId(this.linkedBlock);
             String linkIdString = linkId.toString();
             nbt.putString("golemancy_linked_block", linkIdString);
         }

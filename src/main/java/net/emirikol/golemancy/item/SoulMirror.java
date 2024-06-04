@@ -8,7 +8,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
@@ -24,7 +23,8 @@ public class SoulMirror extends Item implements ExtendedScreenHandlerFactory {
     private String soulData;
 
     public SoulMirror(Settings settings) {
-        super(settings.group(ItemGroup.SEARCH));
+        // TODO: .group(ItemGroup.SEARCH)
+        super(settings);
     }
 
     @Override

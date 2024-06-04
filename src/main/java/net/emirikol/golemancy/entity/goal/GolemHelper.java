@@ -51,7 +51,7 @@ public class GolemHelper {
         ItemStack slotStack = inventory.getStack(slot);
         boolean isValid = inventory.isValid(slot, stack);
         boolean isEmpty = slotStack.isEmpty();
-        boolean canStack = (ItemStack.areItemsEqual(stack, slotStack)) && (ItemStack.areNbtEqual(stack, slotStack)) && (slotStack.getCount() < inventory.getMaxCountPerStack()) && (slotStack.getCount() < slotStack.getMaxCount());
+        boolean canStack = (ItemStack.canCombine(stack, slotStack)) && (slotStack.getCount() < inventory.getMaxCountPerStack()) && (slotStack.getCount() < slotStack.getMaxCount());
         return isValid && (isEmpty || canStack);
     }
 
@@ -105,9 +105,9 @@ public class GolemHelper {
 
     public static boolean tryTeleportTo(AbstractGolemEntity entity, LivingEntity target) {
         for (int i = 0; i < 10; ++i) {
-            double x = target.getX() + getRandomInt((Random) entity.getRandom(), -3, 3);
-            double y = target.getY() + getRandomInt((Random) entity.getRandom(), -1, 1);
-            double z = target.getZ() + getRandomInt((Random) entity.getRandom(), -3, 3);
+            int x = target.getBlockX() + getRandomInt((Random) entity.getRandom(), -3, 3);
+            int y = target.getBlockY() + getRandomInt((Random) entity.getRandom(), -1, 1);
+            int z = target.getBlockZ() + getRandomInt((Random) entity.getRandom(), -3, 3);
             BlockPos pos = new BlockPos(x, y, z);
             if (canTeleportTo(pos, entity)) {
                 entity.teleport(x, y, z);
@@ -119,11 +119,11 @@ public class GolemHelper {
     }
 
     public static boolean canTeleportTo(BlockPos pos, AbstractGolemEntity entity) {
-        PathNodeType pathNodeType = LandPathNodeMaker.getLandNodeType(entity.world, pos.mutableCopy());
+        PathNodeType pathNodeType = LandPathNodeMaker.getLandNodeType(entity.getWorld(), pos.mutableCopy());
         if (pathNodeType != PathNodeType.WALKABLE) {
             return false;
         }
-        return entity.world.getBlockState(pos).isAir() && entity.world.getBlockState(pos.up()).isAir();
+        return entity.getWorld().getBlockState(pos).isAir() && entity.getWorld().getBlockState(pos.up()).isAir();
     }
 
     public static int getRandomInt(Random rand, int min, int max) {

@@ -1,23 +1,23 @@
 package net.emirikol.golemancy.network;
 
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.registry.Registry;
+import org.quiltmc.qsl.networking.api.PacketByteBufs;
+import org.quiltmc.qsl.networking.api.PlayerLookup;
+import org.quiltmc.qsl.networking.api.ServerPlayNetworking;
 
 public class SpawnPacket {
     public static final Identifier SPAWN_PACKET_ID = new Identifier("golemancy", "spawn_packet");
 
     public static void sendSpawnPacket(Entity target) {
         PacketByteBuf buf = PacketByteBufs.create();
-        buf.writeVarInt(Registry.ENTITY_TYPE.getRawId(target.getType()));
+        buf.writeVarInt(Registries.ENTITY_TYPE.getRawId(target.getType()));
         buf.writeUuid(target.getUuid());
         buf.writeVarInt(target.getId());
 
@@ -25,7 +25,7 @@ public class SpawnPacket {
         writeAngle(buf, target.getPitch());
         writeAngle(buf, target.getYaw());
 
-        for (ServerPlayerEntity user : PlayerLookup.tracking((ServerWorld) target.world, target.getBlockPos())) {
+        for (ServerPlayerEntity user : PlayerLookup.tracking((ServerWorld) target.getWorld(), target.getBlockPos())) {
             ServerPlayNetworking.send(user, SPAWN_PACKET_ID, buf);
         }
     }

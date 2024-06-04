@@ -1,6 +1,5 @@
 package net.emirikol.golemancy.entity;
 
-import net.emirikol.golemancy.Golemancy;
 import net.emirikol.golemancy.entity.goal.GolemDanceGoal;
 import net.emirikol.golemancy.entity.goal.GolemMoveToPickupFlowerGoal;
 import net.emirikol.golemancy.registry.GMEntityTypes;

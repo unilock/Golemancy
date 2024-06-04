@@ -72,6 +72,6 @@ public class GolemLookAtHeldBlockGoal extends Goal {
             return false;
         }
         BlockItem item = (BlockItem) stack.getItem();
-        return item.getBlock() == this.entity.world.getBlockState(pos).getBlock();
+        return item.getBlock() == this.entity.getWorld().getBlockState(pos).getBlock();
     }
 }

@@ -42,7 +42,7 @@ public class GolemMoveToPlantGoal extends GolemMoveGoal {
         //Attempt to plant block.
         if (this.canPlant(this.targetPos)) {
             this.plant(this.targetPos);
-            this.entity.world.playSound(null, this.entity.getBlockPos(), SoundEvents.ITEM_CROP_PLANT, SoundCategory.NEUTRAL, 1F, 1F);
+            this.entity.getWorld().playSound(null, this.entity.getBlockPos(), SoundEvents.ITEM_CROP_PLANT, SoundCategory.NEUTRAL, 1F, 1F);
             this.entity.tryAttack();
         }
         //Continue towards targetPos.
@@ -52,7 +52,7 @@ public class GolemMoveToPlantGoal extends GolemMoveGoal {
     @Override
     public boolean isTargetPos(BlockPos pos) {
         //We can plant seeds on a block if it is farmland and has nothing above it (including existing crops).
-        ServerWorld world = (ServerWorld) this.entity.world;
+        ServerWorld world = (ServerWorld) this.entity.getWorld();
         BlockState state = world.getBlockState(pos);
         return (state.getBlock() == Blocks.FARMLAND) && world.getBlockState(pos.up()).isAir() && super.isTargetPos(pos);
     }
@@ -80,7 +80,7 @@ public class GolemMoveToPlantGoal extends GolemMoveGoal {
 
     public void plant(BlockPos pos) {
         //Plant the equipped seed on a piece of farmland.
-        ServerWorld world = (ServerWorld) this.entity.world;
+        ServerWorld world = (ServerWorld) this.entity.getWorld();
         ItemStack stack = this.entity.getEquippedStack(EquipmentSlot.MAINHAND);
         BlockItem item = (BlockItem) stack.getItem(); //we already checked this is OK in hasSeed()
         world.setBlockState(pos.up(), item.getBlock().getDefaultState());

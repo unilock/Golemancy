@@ -2,9 +2,11 @@ package net.emirikol.golemancy.block;
 
 import net.emirikol.golemancy.Golemancy;
 import net.emirikol.golemancy.block.entity.SoulGrafterBlockEntity;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
@@ -25,6 +27,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import org.quiltmc.loader.api.minecraft.ClientOnly;
 
 import java.util.Random;
 
@@ -86,7 +89,7 @@ public class SoulGrafterBlock extends BlockWithEntity {
         return checkType(type, Golemancy.SOUL_GRAFTER_ENTITY, SoulGrafterBlockEntity::tick);
     }
 
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
         if (state.get(GRAFTING)) {
             double d = (double) pos.getX() + 0.5D;

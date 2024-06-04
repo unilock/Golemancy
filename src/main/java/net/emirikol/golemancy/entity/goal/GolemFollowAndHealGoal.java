@@ -79,7 +79,7 @@ public class GolemFollowAndHealGoal extends Goal {
             if (this.healingTimer == 0) {
                 this.friend.heal(this.getHealAmount());
                 Particles.healParticle(this.friend);
-                friend.world.playSound(null, friend.getBlockPos(), SoundEvents.ENTITY_EVOKER_CAST_SPELL, SoundCategory.NEUTRAL, 1F, 1F);
+                friend.getWorld().playSound(null, friend.getBlockPos(), SoundEvents.ENTITY_EVOKER_CAST_SPELL, SoundCategory.NEUTRAL, 1F, 1F);
             }
         } else {
             this.setHealing();
@@ -99,7 +99,7 @@ public class GolemFollowAndHealGoal extends Goal {
     public boolean findTarget() {
         float searchRadius = ConfigurationHandler.getGolemRadius();
         float r = searchRadius + (searchRadius * this.entity.getGolemSmarts());
-        List<LivingEntity> list = this.entity.world.getEntitiesByClass(LivingEntity.class, entity.getBoundingBox().expand(r, r, r), (entity) -> {
+        List<LivingEntity> list = this.entity.getWorld().getEntitiesByClass(LivingEntity.class, entity.getBoundingBox().expand(r, r, r), (entity) -> {
             if (entity instanceof TameableEntity) {
                 TameableEntity tameable = (TameableEntity) entity;
                 return this.isWounded(tameable) && (this.entity.getOwnerUuid() != null) && (this.entity.getOwnerUuid().equals(tameable.getOwnerUuid()));

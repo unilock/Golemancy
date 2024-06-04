@@ -6,11 +6,11 @@ import net.emirikol.golemancy.test.EffigyTestSuite;
 import net.emirikol.golemancy.test.GeneticsTestSuite;
 import net.emirikol.golemancy.test.GolemBehaviorTestSuite;
 import net.emirikol.golemancy.test.SoulGrafterTestSuite;
-import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.world.ServerWorld;
+import org.quiltmc.qsl.command.api.CommandRegistrationCallback;
 
 public class CommandRegistrationHandler {
     public static void commandRegistrationHook() {
@@ -28,7 +28,7 @@ public class CommandRegistrationHandler {
         ServerWorld world = context.getSource().getWorld();
         PlayerEntity player;
 
-        player = context.getSource().getPlayer();
+        player = context.getSource().getPlayerOrThrow();
 
         new EffigyTestSuite(world, player).invokeTest();
         new GeneticsTestSuite(world, player).invokeTest();

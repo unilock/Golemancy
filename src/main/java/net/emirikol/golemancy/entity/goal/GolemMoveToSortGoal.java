@@ -38,7 +38,7 @@ public class GolemMoveToSortGoal extends GolemMoveGoal {
         //Attempt to deposit into block.
         if (this.canDeposit(this.targetPos)) {
             this.deposit(this.targetPos);
-            this.entity.world.playSound(null, this.entity.getBlockPos(), SoundEvents.ITEM_BUNDLE_INSERT, SoundCategory.NEUTRAL, 1F, 1F);
+            this.entity.getWorld().playSound(null, this.entity.getBlockPos(), SoundEvents.ITEM_BUNDLE_INSERT, SoundCategory.NEUTRAL, 1F, 1F);
         }
         //Continue towards targetPos.
         super.tick();
@@ -48,7 +48,7 @@ public class GolemMoveToSortGoal extends GolemMoveGoal {
     public boolean isTargetPos(BlockPos pos) {
         //We should move to a block if it is an inventory that we can insert our currently held item into, and if it already contains the item in question.
         //Also, it can't be the same as our linked inventory.
-        ServerWorld world = (ServerWorld) this.entity.world;
+        ServerWorld world = (ServerWorld) this.entity.getWorld();
         ItemStack stack = entity.getEquippedStack(EquipmentSlot.MAINHAND);
 
         Inventory inventory = GolemHelper.getInventory(pos, world);
@@ -83,7 +83,7 @@ public class GolemMoveToSortGoal extends GolemMoveGoal {
     }
 
     public void deposit(BlockPos pos) {
-        ServerWorld world = (ServerWorld) this.entity.world;
+        ServerWorld world = (ServerWorld) this.entity.getWorld();
         ItemStack stack = this.entity.getEquippedStack(EquipmentSlot.MAINHAND);
         Inventory inventory = GolemHelper.getInventory(pos, world);
         GolemHelper.tryInsert(stack, inventory);

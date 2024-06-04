@@ -1,6 +1,5 @@
 package net.emirikol.golemancy.entity;
 
-import net.emirikol.golemancy.Golemancy;
 import net.emirikol.golemancy.entity.goal.GolemDepositVesselGoal;
 import net.emirikol.golemancy.entity.goal.GolemExtractItemGoal;
 import net.emirikol.golemancy.entity.goal.GolemFillVesselGoal;

@@ -6,7 +6,12 @@ import net.emirikol.golemancy.genetics.Gene;
 import net.emirikol.golemancy.genetics.Genome;
 import net.emirikol.golemancy.genetics.SoulType;
 import net.emirikol.golemancy.item.SoulstoneFilled;
-import net.minecraft.block.*;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.HorizontalFacingBlock;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
@@ -87,11 +92,11 @@ public class ClayEffigyBlock extends Block {
             Gene<Integer> vigorGene = genome.getInteger("vigor");
             Gene<Integer> smartsGene = genome.getInteger("smarts");
             //Get entity type.
-            EntityType<? extends AbstractGolemEntity> golemType = typeGene.getActive().getEntityType();
+            EntityType<? extends AbstractGolemEntity> golemType = typeGene.getActive().entityType();
             if (golemType == null) {
                 return ActionResult.PASS;
             } //shouldn't throw an error, as this can happen w/ soulstones that have invalid data (i.e. "generic soulstone")
-            AbstractGolemEntity entity = golemType.create(serverWorld, null, null, null, pos, SpawnReason.SPAWN_EGG, true, true);
+            AbstractGolemEntity entity = golemType.create(serverWorld, null, null, pos, SpawnReason.SPAWN_EGG, true, true);
             if (entity == null) {
                 throw new java.lang.RuntimeException("Attempt to create golem entity from soulstone returned NULL entity!");
             }

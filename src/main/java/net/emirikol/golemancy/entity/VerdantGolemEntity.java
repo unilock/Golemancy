@@ -1,6 +1,5 @@
 package net.emirikol.golemancy.entity;
 
-import net.emirikol.golemancy.Golemancy;
 import net.emirikol.golemancy.entity.goal.GolemExtractSeedsGoal;
 import net.emirikol.golemancy.entity.goal.GolemMoveToPlantGoal;
 import net.emirikol.golemancy.registry.GMEntityTypes;

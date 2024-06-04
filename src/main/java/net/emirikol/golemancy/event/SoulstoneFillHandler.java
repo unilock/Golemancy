@@ -1,6 +1,5 @@
 package net.emirikol.golemancy.event;
 
-import net.emirikol.golemancy.Golemancy;
 import net.emirikol.golemancy.genetics.Genome;
 import net.emirikol.golemancy.genetics.Genomes;
 import net.emirikol.golemancy.registry.GMObjects;

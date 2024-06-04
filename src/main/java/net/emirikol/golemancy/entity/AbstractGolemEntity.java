@@ -1,14 +1,11 @@
 package net.emirikol.golemancy.entity;
 
-import net.emirikol.golemancy.Golemancy;
 import net.emirikol.golemancy.GolemancyComponents;
 import net.emirikol.golemancy.component.GolemComponent;
 import net.emirikol.golemancy.entity.goal.GolemFollowOwnerGoal;
 import net.emirikol.golemancy.entity.goal.GolemMoveToHomeGoal;
 import net.emirikol.golemancy.event.ConfigurationHandler;
 import net.emirikol.golemancy.registry.GMObjects;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -24,11 +21,14 @@ import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.DyeItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.EntityView;
 import net.minecraft.world.World;
+import org.quiltmc.loader.api.minecraft.ClientOnly;
 
 public abstract class AbstractGolemEntity extends TameableEntity {
     private int strength, agility, vigor, smarts;
@@ -46,12 +46,12 @@ public abstract class AbstractGolemEntity extends TameableEntity {
     public AbstractGolemEntity(EntityType<? extends AbstractGolemEntity> entityType, World world) {
         super(entityType, world);
         this.setTamed(false);
-        this.stepHeight = 1.0F;
+        this.setStepHeight(1.0F);
         this.golemWandFollow = false;
     }
 
     public static DefaultAttributeContainer.Builder createGolemAttributes() {
-        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25).add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0D).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0D);
+        return MobEntity.createAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25).add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0D).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0D);
     }
 
     @Override
@@ -94,10 +94,7 @@ public abstract class AbstractGolemEntity extends TameableEntity {
     public boolean isInvulnerableTo(DamageSource source) {
         if (this.getMaterial() == GolemMaterial.OBSIDIAN) {
             //Obsidian golems are fireproof.
-            if (source == DamageSource.HOT_FLOOR) return true;
-            if (source == DamageSource.LAVA) return true;
-            if (source == DamageSource.IN_FIRE) return true;
-            if (source == DamageSource.ON_FIRE) return true;
+            if (source.isTypeIn(DamageTypeTags.IS_FIRE)) return true;
         }
         return super.isInvulnerableTo(source);
     }
@@ -129,7 +126,7 @@ public abstract class AbstractGolemEntity extends TameableEntity {
 
     @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
-        if (this.world.isClient()) {
+        if (this.getWorld().isClient()) {
             return super.interactMob(player, hand);
         }
         //Ignore the off-hand.
@@ -227,7 +224,7 @@ public abstract class AbstractGolemEntity extends TameableEntity {
     public void linkToBlockPos(BlockPos pos) {
         this.linkedBlockPos = pos;
         if (pos != null) {
-            this.linkedBlock = this.world.getBlockState(pos).getBlock();
+            this.linkedBlock = this.getWorld().getBlockState(pos).getBlock();
         } else {
             this.linkedBlock = null;
         }
@@ -385,7 +382,7 @@ public abstract class AbstractGolemEntity extends TameableEntity {
     @Override
     public boolean tryAttack(Entity target) {
         this.attackTicksLeft = this.getMaxAttackTicks();
-        this.world.sendEntityStatus(this, (byte) 4);
+        this.getWorld().sendEntityStatus(this, (byte) 4);
         return super.tryAttack(target);
     }
 
@@ -395,7 +392,7 @@ public abstract class AbstractGolemEntity extends TameableEntity {
             return false;
         }
         this.attackTicksLeft = this.getMaxAttackTicks();
-        this.world.sendEntityStatus(this, (byte) 4);
+        this.getWorld().sendEntityStatus(this, (byte) 4);
         return true;
     }
 
@@ -405,7 +402,7 @@ public abstract class AbstractGolemEntity extends TameableEntity {
             return false;
         }
         this.swingTicksLeft = this.getMaxSwingTicks();
-        this.world.sendEntityStatus(this, (byte) 66);
+        this.getWorld().sendEntityStatus(this, (byte) 66);
         return true;
     }
 
@@ -415,7 +412,7 @@ public abstract class AbstractGolemEntity extends TameableEntity {
             return false;
         }
         this.prayTicksLeft = this.getMaxPrayTicks();
-        this.world.sendEntityStatus(this, (byte) 67);
+        this.getWorld().sendEntityStatus(this, (byte) 67);
         return true;
     }
 
@@ -427,13 +424,13 @@ public abstract class AbstractGolemEntity extends TameableEntity {
             return false;
         }
         this.danceTicksLeft = this.getMaxDanceTicks();
-        this.world.sendEntityStatus(this, (byte) 68);
+        this.getWorld().sendEntityStatus(this, (byte) 68);
         return true;
     }
 
     public boolean interruptPray() {
         this.prayTicksLeft = 0;
-        this.world.sendEntityStatus(this, (byte) 69);
+        this.getWorld().sendEntityStatus(this, (byte) 69);
         return true;
     }
 
@@ -455,7 +452,12 @@ public abstract class AbstractGolemEntity extends TameableEntity {
     }
 
     @Override
-    @Environment(EnvType.CLIENT)
+    public EntityView getEntityView() {
+        return this.getWorld();
+    }
+
+    @Override
+    @ClientOnly
     public void handleStatus(byte status) {
         switch (status) {
             case 4:
@@ -479,22 +481,22 @@ public abstract class AbstractGolemEntity extends TameableEntity {
         }
     }
 
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     public int getAttackTicksLeft() {
         return this.attackTicksLeft;
     }
 
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     public int getSwingTicksLeft() {
         return this.swingTicksLeft;
     }
 
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     public int getPrayTicksLeft() {
         return this.prayTicksLeft;
     }
 
-    @Environment(EnvType.CLIENT)
+    @ClientOnly
     public int getDanceTicksLeft() {
         return this.danceTicksLeft;
     }

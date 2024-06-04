@@ -1,11 +1,14 @@
 package net.emirikol.golemancy.genetics;
 
-import net.emirikol.golemancy.Golemancy;
 import net.emirikol.golemancy.entity.AbstractGolemEntity;
 import net.emirikol.golemancy.registry.GMEntityTypes;
 import net.minecraft.entity.EntityType;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SoulTypes {
     public static final SoulType GENERIC = new SoulType("text.golemancy.type.generic", GMEntityTypes.RESTLESS_GOLEM_ENTITY);
@@ -66,7 +69,7 @@ public class SoulTypes {
     public static SoulType get(String typeString) {
         //Find a SoulType from the type string, i.e. "text.golemancy.type.curious".
         for (SoulType soulType : SOUL_TYPES) {
-            if (soulType.getTypeString().equals(typeString)) {
+            if (soulType.typeString().equals(typeString)) {
                 return soulType;
             }
         }
@@ -74,9 +77,9 @@ public class SoulTypes {
     }
 
     public static Collection<EntityType<? extends AbstractGolemEntity>> getEntityTypes() {
-        return new ArrayList<EntityType<? extends AbstractGolemEntity>>() {{
+        return new ArrayList<>() {{
             for (SoulType soulType : SOUL_TYPES) {
-                add(soulType.getEntityType());
+                add(soulType.entityType());
             }
         }};
     }

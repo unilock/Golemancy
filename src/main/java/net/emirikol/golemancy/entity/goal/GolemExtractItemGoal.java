@@ -35,7 +35,7 @@ public class GolemExtractItemGoal extends Goal {
                 ItemStack stack = this.container.getStack(i);
                 if (!stack.isEmpty() && canTake(stack)) {
                     this.entity.equipStack(EquipmentSlot.MAINHAND, stack.split(1));
-                    this.entity.world.playSound(null, this.entity.getBlockPos(), SoundEvents.ITEM_BUNDLE_REMOVE_ONE, SoundCategory.NEUTRAL, 1F, 1F);
+                    this.entity.getWorld().playSound(null, this.entity.getBlockPos(), SoundEvents.ITEM_BUNDLE_REMOVE_ONE, SoundCategory.NEUTRAL, 1F, 1F);
                     return;
                 }
             }
@@ -52,7 +52,7 @@ public class GolemExtractItemGoal extends Goal {
 
     private boolean linkedBlockIsContainer() {
         BlockPos pos = this.entity.getLinkedBlockPos();
-        ServerWorld world = (ServerWorld) this.entity.world;
+        ServerWorld world = (ServerWorld) this.entity.getWorld();
         if (pos == null) {
             return false;
         }

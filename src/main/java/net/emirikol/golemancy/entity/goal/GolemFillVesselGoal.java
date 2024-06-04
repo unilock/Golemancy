@@ -44,14 +44,14 @@ public class GolemFillVesselGoal extends Goal {
     public void tick() {
         ItemStack stack = this.drainFluid(this.fluidPos);
         if (stack != ItemStack.EMPTY) {
-            entity.world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ITEM_BUCKET_FILL, SoundCategory.NEUTRAL, 1.0F, 1.0F + (entity.world.random.nextFloat() - entity.world.random.nextFloat()) * 0.4F);
+            entity.getWorld().playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ITEM_BUCKET_FILL, SoundCategory.NEUTRAL, 1.0F, 1.0F + (entity.getWorld().random.nextFloat() - entity.getWorld().random.nextFloat()) * 0.4F);
             this.entity.equipStack(EquipmentSlot.MAINHAND, stack);
         }
     }
 
     public boolean isFluidNearby() {
         BlockPos pos = this.entity.getBlockPos();
-        ServerWorld world = (ServerWorld) this.entity.world;
+        ServerWorld world = (ServerWorld) this.entity.getWorld();
 
         for (BlockPos curPos : BlockPos.iterateOutwards(pos, FILL_RANGE, FILL_RANGE, FILL_RANGE)) {
             if (isFluidDrainable(curPos, world)) {
@@ -69,7 +69,7 @@ public class GolemFillVesselGoal extends Goal {
     }
 
     public ItemStack drainFluid(BlockPos pos) {
-        ServerWorld world = (ServerWorld) this.entity.world;
+        ServerWorld world = (ServerWorld) this.entity.getWorld();
         BlockState state = world.getBlockState(pos);
         FluidDrainable fluidBlock = (FluidDrainable) state.getBlock();
         ItemStack vessel = this.entity.getEquippedStack(EquipmentSlot.MAINHAND);

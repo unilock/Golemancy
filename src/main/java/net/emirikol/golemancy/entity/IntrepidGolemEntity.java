@@ -1,13 +1,16 @@
 package net.emirikol.golemancy.entity;
 
-import net.emirikol.golemancy.Golemancy;
 import net.emirikol.golemancy.entity.goal.GolemDropHeldItemGoal;
 import net.emirikol.golemancy.entity.projectile.ClayballEntity;
 import net.emirikol.golemancy.registry.GMEntityTypes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.RangedAttackMob;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.AttackWithOwnerGoal;
+import net.minecraft.entity.ai.goal.ProjectileAttackGoal;
+import net.minecraft.entity.ai.goal.RevengeGoal;
+import net.minecraft.entity.ai.goal.TargetGoal;
+import net.minecraft.entity.ai.goal.TrackOwnerAttackerGoal;
 import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.Monster;
@@ -50,7 +53,7 @@ public class IntrepidGolemEntity extends AbstractGolemEntity implements RangedAt
 
     @Override
     public void attack(LivingEntity target, float pullProgress) {
-        ClayballEntity clayballEntity = new ClayballEntity(this.world, this);
+        ClayballEntity clayballEntity = new ClayballEntity(this.getWorld(), this);
         clayballEntity.setDamage(this.getAttackDamageFromStrength());
         double d = target.getEyeY() - (double) 1.1f;
         double e = target.getX() - this.getX();
@@ -60,6 +63,6 @@ public class IntrepidGolemEntity extends AbstractGolemEntity implements RangedAt
         clayballEntity.setVelocity(e, f + h, g, 1.6f, 12.0f);
         this.playSound(SoundEvents.ENTITY_SNOW_GOLEM_SHOOT, 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
         this.tryAttack(target);
-        this.world.spawnEntity(clayballEntity);
+        this.getWorld().spawnEntity(clayballEntity);
     }
 }

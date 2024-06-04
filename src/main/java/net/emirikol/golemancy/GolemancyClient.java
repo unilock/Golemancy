@@ -12,23 +12,23 @@ import net.emirikol.golemancy.registry.GMEntityTypes;
 import net.emirikol.golemancy.registry.GMObjects;
 import net.emirikol.golemancy.screen.SoulGrafterScreen;
 import net.emirikol.golemancy.screen.SoulMirrorScreen;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.registry.Registry;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.client.ClientModInitializer;
 import org.quiltmc.qsl.block.extensions.api.client.BlockRenderLayerMap;
+import org.quiltmc.qsl.networking.api.client.ClientPlayNetworking;
 
 import java.util.UUID;
 
@@ -50,9 +50,9 @@ public class GolemancyClient implements ClientModInitializer {
 
     public void registerEntities() {
         //Register Soul Mirror Screen
-        ScreenRegistry.register(Golemancy.SOUL_MIRROR_SCREEN_HANDLER, SoulMirrorScreen::new);
+        HandledScreens.register(Golemancy.SOUL_MIRROR_SCREEN_HANDLER, SoulMirrorScreen::new);
         //Register Soul Grafter Screen
-        ScreenRegistry.register(Golemancy.SOUL_GRAFTER_SCREEN_HANDLER, SoulGrafterScreen::new);
+        HandledScreens.register(Golemancy.SOUL_GRAFTER_SCREEN_HANDLER, SoulGrafterScreen::new);
         //Register Golem Renderers
         for (EntityType<? extends AbstractGolemEntity> type : SoulTypes.getEntityTypes()) {
             EntityRendererRegistry.register(type, GolemEntityRenderer::new);
@@ -88,7 +88,7 @@ public class GolemancyClient implements ClientModInitializer {
 
     public void registerSpawnPacket() {
         ClientPlayNetworking.registerGlobalReceiver(SpawnPacket.SPAWN_PACKET_ID, (client, handler, buf, responseSender) -> {
-            EntityType<?> et = Registry.ENTITY_TYPE.get(buf.readVarInt());
+            EntityType<?> et = Registries.ENTITY_TYPE.get(buf.readVarInt());
             UUID uuid = buf.readUuid();
             int entityId = buf.readVarInt();
             Vec3d pos = SpawnPacket.readVec3d(buf);
@@ -100,7 +100,7 @@ public class GolemancyClient implements ClientModInitializer {
                     throw new IllegalStateException("Tried to spawn entity in a null world!");
                 Entity e = et.create(MinecraftClient.getInstance().world);
                 if (e == null)
-                    throw new IllegalStateException("Failed to create instance of entity \"" + Registry.ENTITY_TYPE.getId(et) + "\"!");
+                    throw new IllegalStateException("Failed to create instance of entity \"" + Registries.ENTITY_TYPE.getId(et) + "\"!");
                 e.updatePosition(pos.x, pos.y, pos.z);
                 e.setPos(pos.x, pos.y, pos.z);
                 e.setPitch(pitch);
@@ -114,7 +114,7 @@ public class GolemancyClient implements ClientModInitializer {
 
     public void registerConfigPacket() {
         //Used to sync golemancy config between server and client.
-        ClientPlayNetworking.registerGlobalReceiver(Golemancy.ConfigPacketID, (client, handler, buf, responseSender) -> {
+        ClientPlayNetworking.registerGlobalReceiver(Golemancy.CONFIG_PACKET_ID, (client, handler, buf, responseSender) -> {
             float graftSpeedMultiplier = buf.readFloat();
             float graftFuelMultiplier = buf.readFloat();
             float graftPotencyMultiplier = buf.readFloat();

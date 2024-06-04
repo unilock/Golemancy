@@ -1,6 +1,5 @@
 package net.emirikol.golemancy.test;
 
-import net.emirikol.golemancy.Golemancy;
 import net.emirikol.golemancy.block.entity.SoulGrafterBlockEntity;
 import net.emirikol.golemancy.genetics.Genomes;
 import net.emirikol.golemancy.genetics.SoulTypes;

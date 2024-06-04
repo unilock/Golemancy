@@ -4,14 +4,14 @@ import net.emirikol.golemancy.genetics.Gene;
 import net.emirikol.golemancy.genetics.Genome;
 import net.emirikol.golemancy.genetics.SoulType;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 
 public class SoulstoneFilled extends Item {
 
     public SoulstoneFilled(Settings settings) {
-        super(settings.group(ItemGroup.SEARCH));
+        // TODO: .group(ItemGroup.SEARCH)
+        super(settings);
     }
 
     @Override
@@ -19,8 +19,8 @@ public class SoulstoneFilled extends Item {
         Genome genome = new Genome(stack);
         Gene<SoulType> gene = genome.getSoulType("type");
         if (gene == null || gene.getActive() == null) return super.getName(stack);
-        String type = gene.getActive().getTypeString();
-        if (type.length() > 0) {
+        String type = gene.getActive().typeString();
+        if (!type.isEmpty()) {
             return Text.translatable(this.getTranslationKey(stack), gene.getActive().getTypeText());
         } else {
             return super.getName(stack);

@@ -1,6 +1,5 @@
 package net.emirikol.golemancy.test;
 
-import net.emirikol.golemancy.Golemancy;
 import net.emirikol.golemancy.entity.CuriousGolemEntity;
 import net.emirikol.golemancy.genetics.Genome;
 import net.emirikol.golemancy.genetics.Genomes;

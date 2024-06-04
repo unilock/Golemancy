@@ -8,224 +8,224 @@ import java.util.Set;
 
 public class Genomes {
     public static final Genome GENERIC = new Genome() {{
-        put("type", new Gene<SoulType>(SoulTypes.GENERIC));
-        put("potency", new Gene<Integer>(1));
-        put("strength", new Gene<Integer>(0));
-        put("agility", new Gene<Integer>(0));
-        put("vigor", new Gene<Integer>(0));
-        put("smarts", new Gene<Integer>(0));
+        put("type", new Gene<>(SoulTypes.GENERIC));
+        put("potency", new Gene<>(1));
+        put("strength", new Gene<>(0));
+        put("agility", new Gene<>(0));
+        put("vigor", new Gene<>(0));
+        put("smarts", new Gene<>(0));
     }};
 
     public static final Genome BLAZE = new Genome() {{
-        put("type", new Gene<SoulType>(SoulTypes.PARCHED));
-        put("potency", new Gene<Integer>(3));
-        put("strength", new Gene<Integer>(0));
-        put("agility", new Gene<Integer>(1));
-        put("vigor", new Gene<Integer>(1));
-        put("smarts", new Gene<Integer>(1));
+        put("type", new Gene<>(SoulTypes.PARCHED));
+        put("potency", new Gene<>(3));
+        put("strength", new Gene<>(0));
+        put("agility", new Gene<>(1));
+        put("vigor", new Gene<>(1));
+        put("smarts", new Gene<>(1));
     }};
 
     public static final Genome CREEPER = new Genome() {{
-        put("type", new Gene<SoulType>(SoulTypes.ENTROPIC));
-        put("potency", new Gene<Integer>(3));
-        put("strength", new Gene<Integer>(0));
-        put("agility", new Gene<Integer>(1));
-        put("vigor", new Gene<Integer>(1));
-        put("smarts", new Gene<Integer>(1));
+        put("type", new Gene<>(SoulTypes.ENTROPIC));
+        put("potency", new Gene<>(3));
+        put("strength", new Gene<>(0));
+        put("agility", new Gene<>(1));
+        put("vigor", new Gene<>(1));
+        put("smarts", new Gene<>(1));
     }};
 
     public static final Genome DROWNED = new Genome() {{
-        put("type", new Gene<SoulType>(SoulTypes.MARSHY));
-        put("potency", new Gene<Integer>(3));
-        put("strength", new Gene<Integer>(1));
-        put("agility", new Gene<Integer>(0));
-        put("vigor", new Gene<Integer>(1));
-        put("smarts", new Gene<Integer>(0));
+        put("type", new Gene<>(SoulTypes.MARSHY));
+        put("potency", new Gene<>(3));
+        put("strength", new Gene<>(1));
+        put("agility", new Gene<>(0));
+        put("vigor", new Gene<>(1));
+        put("smarts", new Gene<>(0));
     }};
 
     public static final Genome ENDERMAN = new Genome() {{
-        put("type", new Gene<SoulType>(SoulTypes.COVETOUS));
-        put("potency", new Gene<Integer>(2));
-        put("strength", new Gene<Integer>(1));
-        put("agility", new Gene<Integer>(1));
-        put("vigor", new Gene<Integer>(1));
-        put("smarts", new Gene<Integer>(2));
+        put("type", new Gene<>(SoulTypes.COVETOUS));
+        put("potency", new Gene<>(2));
+        put("strength", new Gene<>(1));
+        put("agility", new Gene<>(1));
+        put("vigor", new Gene<>(1));
+        put("smarts", new Gene<>(2));
     }};
 
     public static final Genome ENDERMITE = new Genome() {{
-        put("type", new Gene<SoulType>(SoulTypes.COVETOUS));
-        put("potency", new Gene<Integer>(4));
-        put("strength", new Gene<Integer>(0));
-        put("agility", new Gene<Integer>(1));
-        put("vigor", new Gene<Integer>(0));
-        put("smarts", new Gene<Integer>(0));
+        put("type", new Gene<>(SoulTypes.COVETOUS));
+        put("potency", new Gene<>(4));
+        put("strength", new Gene<>(0));
+        put("agility", new Gene<>(1));
+        put("vigor", new Gene<>(0));
+        put("smarts", new Gene<>(0));
     }};
 
     public static final Genome GHAST = new Genome() {{
-        put("type", new Gene<SoulType>(SoulTypes.WEEPING));
-        put("potency", new Gene<Integer>(3));
-        put("strength", new Gene<Integer>(0));
-        put("agility", new Gene<Integer>(2));
-        put("vigor", new Gene<Integer>(1));
-        put("smarts", new Gene<Integer>(1));
+        put("type", new Gene<>(SoulTypes.WEEPING));
+        put("potency", new Gene<>(3));
+        put("strength", new Gene<>(0));
+        put("agility", new Gene<>(2));
+        put("vigor", new Gene<>(1));
+        put("smarts", new Gene<>(1));
     }};
 
     public static final Genome GUARDIAN = new Genome() {{
-        put("type", new Gene<SoulType>(SoulTypes.VALIANT));
-        put("potency", new Gene<Integer>(3));
-        put("strength", new Gene<Integer>(1));
-        put("agility", new Gene<Integer>(1));
-        put("vigor", new Gene<Integer>(1));
-        put("smarts", new Gene<Integer>(1));
+        put("type", new Gene<>(SoulTypes.VALIANT));
+        put("potency", new Gene<>(3));
+        put("strength", new Gene<>(1));
+        put("agility", new Gene<>(1));
+        put("vigor", new Gene<>(1));
+        put("smarts", new Gene<>(1));
     }};
 
     public static final Genome HOGLIN = new Genome() {{
-        put("type", new Gene<SoulType>(SoulTypes.HUNGRY));
-        put("potency", new Gene<Integer>(3));
-        put("strength", new Gene<Integer>(1));
-        put("agility", new Gene<Integer>(1));
-        put("vigor", new Gene<Integer>(2));
-        put("smarts", new Gene<Integer>(0));
+        put("type", new Gene<>(SoulTypes.HUNGRY));
+        put("potency", new Gene<>(3));
+        put("strength", new Gene<>(1));
+        put("agility", new Gene<>(1));
+        put("vigor", new Gene<>(2));
+        put("smarts", new Gene<>(0));
     }};
 
     public static final Genome HUSK = new Genome() {{
-        put("type", new Gene<SoulType>(SoulTypes.PARCHED));
-        put("potency", new Gene<Integer>(3));
-        put("strength", new Gene<Integer>(1));
-        put("agility", new Gene<Integer>(0));
-        put("vigor", new Gene<Integer>(1));
-        put("smarts", new Gene<Integer>(0));
+        put("type", new Gene<>(SoulTypes.PARCHED));
+        put("potency", new Gene<>(3));
+        put("strength", new Gene<>(1));
+        put("agility", new Gene<>(0));
+        put("vigor", new Gene<>(1));
+        put("smarts", new Gene<>(0));
     }};
 
     public static final Genome PHANTOM = new Genome() {{
-        put("type", new Gene<SoulType>(SoulTypes.TACTILE));
-        put("potency", new Gene<Integer>(1));
-        put("strength", new Gene<Integer>(1));
-        put("agility", new Gene<Integer>(2));
-        put("vigor", new Gene<Integer>(1));
-        put("smarts", new Gene<Integer>(2));
+        put("type", new Gene<>(SoulTypes.TACTILE));
+        put("potency", new Gene<>(1));
+        put("strength", new Gene<>(1));
+        put("agility", new Gene<>(2));
+        put("vigor", new Gene<>(1));
+        put("smarts", new Gene<>(2));
     }};
 
     public static final Genome RAVAGER = new Genome() {{
-        put("type", new Gene<SoulType>(SoulTypes.VALIANT));
-        put("potency", new Gene<Integer>(2));
-        put("strength", new Gene<Integer>(2));
-        put("agility", new Gene<Integer>(0));
-        put("vigor", new Gene<Integer>(2));
-        put("smarts", new Gene<Integer>(0));
+        put("type", new Gene<>(SoulTypes.VALIANT));
+        put("potency", new Gene<>(2));
+        put("strength", new Gene<>(2));
+        put("agility", new Gene<>(0));
+        put("vigor", new Gene<>(2));
+        put("smarts", new Gene<>(0));
     }};
 
     public static final Genome SHULKER = new Genome() {{
-        put("type", new Gene<SoulType>(SoulTypes.INTREPID));
-        put("potency", new Gene<Integer>(2));
-        put("strength", new Gene<Integer>(0));
-        put("agility", new Gene<Integer>(0));
-        put("vigor", new Gene<Integer>(2));
-        put("smarts", new Gene<Integer>(2));
+        put("type", new Gene<>(SoulTypes.INTREPID));
+        put("potency", new Gene<>(2));
+        put("strength", new Gene<>(0));
+        put("agility", new Gene<>(0));
+        put("vigor", new Gene<>(2));
+        put("smarts", new Gene<>(2));
     }};
 
     public static final Genome SILVERFISH = new Genome() {{
-        put("type", new Gene<SoulType>(SoulTypes.ENTROPIC));
-        put("potency", new Gene<Integer>(4));
-        put("strength", new Gene<Integer>(0));
-        put("agility", new Gene<Integer>(1));
-        put("vigor", new Gene<Integer>(0));
-        put("smarts", new Gene<Integer>(0));
+        put("type", new Gene<>(SoulTypes.ENTROPIC));
+        put("potency", new Gene<>(4));
+        put("strength", new Gene<>(0));
+        put("agility", new Gene<>(1));
+        put("vigor", new Gene<>(0));
+        put("smarts", new Gene<>(0));
     }};
 
     public static final Genome SKELETON = new Genome() {{
-        put("type", new Gene<SoulType>(SoulTypes.RESTLESS));
-        put("potency", new Gene<Integer>(3));
-        put("strength", new Gene<Integer>(1));
-        put("agility", new Gene<Integer>(1));
-        put("vigor", new Gene<Integer>(0));
-        put("smarts", new Gene<Integer>(1));
+        put("type", new Gene<>(SoulTypes.RESTLESS));
+        put("potency", new Gene<>(3));
+        put("strength", new Gene<>(1));
+        put("agility", new Gene<>(1));
+        put("vigor", new Gene<>(0));
+        put("smarts", new Gene<>(1));
     }};
 
     public static final Genome SLIME = new Genome() {{
-        put("type", new Gene<SoulType>(SoulTypes.CURIOUS));
-        put("potency", new Gene<Integer>(5));
-        put("strength", new Gene<Integer>(0));
-        put("agility", new Gene<Integer>(0));
-        put("vigor", new Gene<Integer>(0));
-        put("smarts", new Gene<Integer>(0));
+        put("type", new Gene<>(SoulTypes.CURIOUS));
+        put("potency", new Gene<>(5));
+        put("strength", new Gene<>(0));
+        put("agility", new Gene<>(0));
+        put("vigor", new Gene<>(0));
+        put("smarts", new Gene<>(0));
     }};
 
     public static final Genome SPIDER = new Genome() {{
-        put("type", new Gene<SoulType>(SoulTypes.RESTLESS));
-        put("potency", new Gene<Integer>(3));
-        put("strength", new Gene<Integer>(1));
-        put("agility", new Gene<Integer>(2));
-        put("vigor", new Gene<Integer>(0));
-        put("smarts", new Gene<Integer>(0));
+        put("type", new Gene<>(SoulTypes.RESTLESS));
+        put("potency", new Gene<>(3));
+        put("strength", new Gene<>(1));
+        put("agility", new Gene<>(2));
+        put("vigor", new Gene<>(0));
+        put("smarts", new Gene<>(0));
     }};
 
     public static final Genome VEX = new Genome() {{
-        put("type", new Gene<SoulType>(SoulTypes.COVETOUS));
-        put("potency", new Gene<Integer>(3));
-        put("strength", new Gene<Integer>(0));
-        put("agility", new Gene<Integer>(2));
-        put("vigor", new Gene<Integer>(0));
-        put("smarts", new Gene<Integer>(1));
+        put("type", new Gene<>(SoulTypes.COVETOUS));
+        put("potency", new Gene<>(3));
+        put("strength", new Gene<>(0));
+        put("agility", new Gene<>(2));
+        put("vigor", new Gene<>(0));
+        put("smarts", new Gene<>(1));
     }};
 
     public static final Genome WITHER_SKELETON = new Genome() {{
-        put("type", new Gene<SoulType>(SoulTypes.VALIANT));
-        put("potency", new Gene<Integer>(2));
-        put("strength", new Gene<Integer>(2));
-        put("agility", new Gene<Integer>(1));
-        put("vigor", new Gene<Integer>(1));
-        put("smarts", new Gene<Integer>(1));
+        put("type", new Gene<>(SoulTypes.VALIANT));
+        put("potency", new Gene<>(2));
+        put("strength", new Gene<>(2));
+        put("agility", new Gene<>(1));
+        put("vigor", new Gene<>(1));
+        put("smarts", new Gene<>(1));
     }};
 
     public static final Genome ZOGLIN = new Genome() {{
-        put("type", new Gene<SoulType>(SoulTypes.HUNGRY));
-        put("potency", new Gene<Integer>(3));
-        put("strength", new Gene<Integer>(1));
-        put("agility", new Gene<Integer>(1));
-        put("vigor", new Gene<Integer>(2));
-        put("smarts", new Gene<Integer>(0));
+        put("type", new Gene<>(SoulTypes.HUNGRY));
+        put("potency", new Gene<>(3));
+        put("strength", new Gene<>(1));
+        put("agility", new Gene<>(1));
+        put("vigor", new Gene<>(2));
+        put("smarts", new Gene<>(0));
     }};
 
     public static final Genome ZOMBIE = new Genome() {{
-        put("type", new Gene<SoulType>(SoulTypes.HUNGRY));
-        put("potency", new Gene<Integer>(3));
-        put("strength", new Gene<Integer>(1));
-        put("agility", new Gene<Integer>(0));
-        put("vigor", new Gene<Integer>(1));
-        put("smarts", new Gene<Integer>(0));
+        put("type", new Gene<>(SoulTypes.HUNGRY));
+        put("potency", new Gene<>(3));
+        put("strength", new Gene<>(1));
+        put("agility", new Gene<>(0));
+        put("vigor", new Gene<>(1));
+        put("smarts", new Gene<>(0));
     }};
 
     // Boss Genomes
 
     public static final Genome ELDER_GUARDIAN = new Genome() {{
-        put("type", new Gene<SoulType>(SoulTypes.VALIANT));
-        put("potency", new Gene<Integer>(3));
-        put("strength", new Gene<Integer>(1));
-        put("agility", new Gene<Integer>(1));
-        put("vigor", new Gene<Integer>(3));
-        put("smarts", new Gene<Integer>(1));
+        put("type", new Gene<>(SoulTypes.VALIANT));
+        put("potency", new Gene<>(3));
+        put("strength", new Gene<>(1));
+        put("agility", new Gene<>(1));
+        put("vigor", new Gene<>(3));
+        put("smarts", new Gene<>(1));
     }};
 
     public static final Genome WITHER = new Genome() {{
-        put("type", new Gene<SoulType>(SoulTypes.VALIANT));
-        put("potency", new Gene<Integer>(2));
-        put("strength", new Gene<Integer>(2));
-        put("agility", new Gene<Integer>(1));
-        put("vigor", new Gene<Integer>(1));
-        put("smarts", new Gene<Integer>(3));
+        put("type", new Gene<>(SoulTypes.VALIANT));
+        put("potency", new Gene<>(2));
+        put("strength", new Gene<>(2));
+        put("agility", new Gene<>(1));
+        put("vigor", new Gene<>(1));
+        put("smarts", new Gene<>(3));
     }};
 
     public static final Genome ENDER_DRAGON = new Genome() {{
-        put("type", new Gene<SoulType>(SoulTypes.COVETOUS));
-        put("potency", new Gene<Integer>(2));
-        put("strength", new Gene<Integer>(3));
-        put("agility", new Gene<Integer>(3));
-        put("vigor", new Gene<Integer>(1));
-        put("smarts", new Gene<Integer>(2));
+        put("type", new Gene<>(SoulTypes.COVETOUS));
+        put("potency", new Gene<>(2));
+        put("strength", new Gene<>(3));
+        put("agility", new Gene<>(3));
+        put("vigor", new Gene<>(1));
+        put("smarts", new Gene<>(2));
     }};
 
-    public static final Map<EntityType, Genome> GENOMES = new HashMap<EntityType, Genome>() {{
+    public static final Map<EntityType<?>, Genome> GENOMES = new HashMap<>() {{
         put(EntityType.BLAZE, BLAZE);
         put(EntityType.CREEPER, CREEPER);
         put(EntityType.ENDERMAN, ENDERMAN);
@@ -259,23 +259,23 @@ public class Genomes {
         put(EntityType.ENDER_DRAGON, ENDER_DRAGON);
     }};
 
-    public static Set<EntityType> getEntityTypes() {
+    public static Set<EntityType<?>> getEntityTypes() {
         return GENOMES.keySet();
     }
 
-    public static Genome get(EntityType entityType) {
+    public static Genome get(EntityType<?> entityType) {
         return GENOMES.get(entityType);
     }
 
     public static Genome creativeGenome(SoulType soulType) {
         //Create a "perfect" genome of the given type, for use in the creative menu.
         return new Genome() {{
-            put("type", new Gene<SoulType>(soulType));
-            put("potency", new Gene<Integer>(5));
-            put("strength", new Gene<Integer>(3));
-            put("agility", new Gene<Integer>(3));
-            put("vigor", new Gene<Integer>(3));
-            put("smarts", new Gene<Integer>(3));
+            put("type", new Gene<>(soulType));
+            put("potency", new Gene<>(5));
+            put("strength", new Gene<>(3));
+            put("agility", new Gene<>(3));
+            put("vigor", new Gene<>(3));
+            put("smarts", new Gene<>(3));
         }};
     }
 }
