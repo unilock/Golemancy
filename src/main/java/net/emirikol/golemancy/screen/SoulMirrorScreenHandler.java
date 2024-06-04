@@ -21,7 +21,7 @@ public class SoulMirrorScreenHandler extends ScreenHandler {
     }
 
     @Override
-    public ItemStack transferSlot(PlayerEntity player, int index) {
+    public ItemStack quickTransfer(PlayerEntity player, int index) {
         return null;
     }
 
