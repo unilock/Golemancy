@@ -1,11 +1,9 @@
 package net.emirikol.golemancy.entity.goal;
 
 import net.emirikol.golemancy.entity.AbstractGolemEntity;
-import net.emirikol.golemancy.util.ModSupport;
+import net.emirikol.golemancy.util.GMUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.CropBlock;
-import net.minecraft.block.StemBlock;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.item.BlockItem;
@@ -58,15 +56,9 @@ public class GolemMoveToPlantGoal extends GolemMoveGoal {
     }
 
     public boolean hasSeed() {
-        //Check whether a given ItemStack is a "seed", i.e. an AliasedBlockItem that places something which extends CropBlock or StemBlock.
         ItemStack stack = this.entity.getEquippedStack(EquipmentSlot.MAINHAND);
-        if (!(stack.getItem() instanceof BlockItem item)) return false;
 
-        boolean crop = item.getBlock() instanceof CropBlock;
-        boolean stem = item.getBlock() instanceof StemBlock;
-        boolean modSeed = ModSupport.isModdedSeed(stack);
-
-        return crop || stem || modSeed;
+        return GMUtils.isSeed(stack);
     }
 
     public boolean canPlant(BlockPos pos) {
