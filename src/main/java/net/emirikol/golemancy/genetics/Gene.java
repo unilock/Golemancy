@@ -19,7 +19,7 @@ public class Gene<T> {
     }
 
     public List<T> toList() {
-        return new ArrayList<T>() {{
+        return new ArrayList<>() {{
             add(active);
             add(dormant);
         }};

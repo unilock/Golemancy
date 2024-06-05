@@ -68,10 +68,9 @@ public class GolemLookAtHeldBlockGoal extends Goal {
 
     public boolean isTargetPos(BlockPos pos) {
         ItemStack stack = entity.getEquippedStack(EquipmentSlot.MAINHAND);
-        if (stack.isEmpty() || !(stack.getItem() instanceof BlockItem)) {
+        if (stack.isEmpty() || !(stack.getItem() instanceof BlockItem item)) {
             return false;
         }
-        BlockItem item = (BlockItem) stack.getItem();
         return item.getBlock() == this.entity.getWorld().getBlockState(pos).getBlock();
     }
 }

@@ -60,9 +60,8 @@ public class GolemMoveToPlantGoal extends GolemMoveGoal {
     public boolean hasSeed() {
         //Check whether a given ItemStack is a "seed", i.e. an AliasedBlockItem that places something which extends CropBlock or StemBlock.
         ItemStack stack = this.entity.getEquippedStack(EquipmentSlot.MAINHAND);
-        if (!(stack.getItem() instanceof BlockItem)) return false;
+        if (!(stack.getItem() instanceof BlockItem item)) return false;
 
-        BlockItem item = (BlockItem) stack.getItem();
         boolean crop = item.getBlock() instanceof CropBlock;
         boolean stem = item.getBlock() instanceof StemBlock;
         boolean modSeed = ModSupport.isModdedSeed(stack);

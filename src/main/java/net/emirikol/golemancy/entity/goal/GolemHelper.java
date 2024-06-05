@@ -37,8 +37,7 @@ public class GolemHelper {
             ChestBlock block = (ChestBlock) state.getBlock();
             return ChestBlock.getInventory(block, state, world, pos, true);
         }
-        if (state.getBlock() instanceof InventoryProvider) {
-            InventoryProvider provider = (InventoryProvider) state.getBlock();
+        if (state.getBlock() instanceof InventoryProvider provider) {
             return provider.getInventory(state, world, pos);
         }
         if (blockEntity instanceof Inventory) {
@@ -94,10 +93,9 @@ public class GolemHelper {
         Inventory inventory = GolemHelper.getInventory(left, world);
         BlockEntity leftEntity = world.getBlockEntity(left);
         BlockEntity rightEntity = world.getBlockEntity(right);
-        if (!(inventory instanceof DoubleInventory) || !(leftEntity instanceof Inventory) || !(rightEntity instanceof Inventory)) {
+        if (!(inventory instanceof DoubleInventory doubleInventory) || !(leftEntity instanceof Inventory) || !(rightEntity instanceof Inventory)) {
             return false;
         }
-        DoubleInventory doubleInventory = (DoubleInventory) inventory;
         return (doubleInventory.isPart((Inventory) leftEntity)) && (doubleInventory.isPart((Inventory) rightEntity));
     }
 

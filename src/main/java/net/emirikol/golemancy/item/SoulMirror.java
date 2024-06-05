@@ -23,7 +23,6 @@ public class SoulMirror extends Item implements ExtendedScreenHandlerFactory {
     private String soulData;
 
     public SoulMirror(Settings settings) {
-        // TODO: .group(ItemGroup.SEARCH)
         super(settings);
     }
 

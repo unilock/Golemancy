@@ -10,7 +10,6 @@ import net.minecraft.text.Text;
 public class SoulstoneFilled extends Item {
 
     public SoulstoneFilled(Settings settings) {
-        // TODO: .group(ItemGroup.SEARCH)
         super(settings);
     }
 

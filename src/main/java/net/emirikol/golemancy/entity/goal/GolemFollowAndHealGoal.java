@@ -100,17 +100,15 @@ public class GolemFollowAndHealGoal extends Goal {
         float searchRadius = ConfigurationHandler.getGolemRadius();
         float r = searchRadius + (searchRadius * this.entity.getGolemSmarts());
         List<LivingEntity> list = this.entity.getWorld().getEntitiesByClass(LivingEntity.class, entity.getBoundingBox().expand(r, r, r), (entity) -> {
-            if (entity instanceof TameableEntity) {
-                TameableEntity tameable = (TameableEntity) entity;
+            if (entity instanceof TameableEntity tameable) {
                 return this.isWounded(tameable) && (this.entity.getOwnerUuid() != null) && (this.entity.getOwnerUuid().equals(tameable.getOwnerUuid()));
             }
-            if (entity instanceof PlayerEntity) {
-                PlayerEntity player = (PlayerEntity) entity;
+            if (entity instanceof PlayerEntity player) {
                 return this.canHealOwner && this.isWounded(player) && (this.entity.getOwnerUuid() != null) && (this.entity.getOwnerUuid().equals(player.getUuid()));
             }
             return false;
         });
-        if (list.size() > 0) {
+        if (!list.isEmpty()) {
             this.friend = list.get(0);
             return true;
         }

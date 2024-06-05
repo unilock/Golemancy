@@ -14,8 +14,7 @@ public class GolemMoveToPickupFlowerGoal extends GolemMoveToPickupGoal {
     @Override
     public boolean canPickUp(ItemEntity entity) {
         Item item = entity.getStack().getItem();
-        if (item instanceof BlockItem) {
-            BlockItem blockItem = (BlockItem) item;
+        if (item instanceof BlockItem blockItem) {
             return blockItem.getBlock() instanceof FlowerBlock;
         }
         return false;

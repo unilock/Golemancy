@@ -29,7 +29,7 @@ public class SoulTypes {
     public static final SoulType VERDANT = new SoulType("text.golemancy.type.verdant", GMEntityTypes.VERDANT_GOLEM_ENTITY);
     public static final SoulType WEEPING = new SoulType("text.golemancy.type.weeping", GMEntityTypes.WEEPING_GOLEM_ENTITY);
 
-    public static final List<SoulType> SOUL_TYPES = new ArrayList<SoulType>() {{
+    public static final List<SoulType> SOUL_TYPES = new ArrayList<>() {{
         add(GENERIC);
         add(CAREFUL);
         add(COVETOUS);
@@ -48,7 +48,7 @@ public class SoulTypes {
         add(WEEPING);
     }};
 
-    public static final Map<SoulType, Integer> TEXTURE_VARIANTS = new HashMap<SoulType, Integer>() {{
+    public static final Map<SoulType, Integer> TEXTURE_VARIANTS = new HashMap<>() {{
         put(RESTLESS, 1);
         put(CURIOUS, 2);
         put(HUNGRY, 3);

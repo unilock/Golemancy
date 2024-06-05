@@ -23,7 +23,6 @@ public class GolemWand extends Item {
     private static final double TELEPORT_RANGE = 120.0D;
 
     public GolemWand(Settings settings) {
-        // TODO: .group(ItemGroup.SEARCH)
         super(settings);
 
     }

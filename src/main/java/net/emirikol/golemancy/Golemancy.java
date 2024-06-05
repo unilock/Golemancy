@@ -39,7 +39,6 @@ public class Golemancy implements ModInitializer {
     @Override
     public void onInitialize(ModContainer container) {
         GMObjects.register();
-        GolemancyItemGroup.register(); //add custom ItemGroup that contains all mod items including custom soulstones
         GMEntityTypes.register();
         Registry.register(Registries.BLOCK_ENTITY_TYPE, "golemancy:soul_grafter", SOUL_GRAFTER_ENTITY);
         for (EntityType<? extends AbstractGolemEntity> type : SoulTypes.getEntityTypes()) {
@@ -48,6 +47,7 @@ public class Golemancy implements ModInitializer {
         CommandRegistrationHandler.commandRegistrationHook(); //add event hook for registering this mod's commands
         SoulstoneFillHandler.soulstoneFillHook(); //add event hook for replacing soulstones with mob soulstones when you kill mobs
         ConfigurationHandler.syncConfigHook(); //add event hook for syncing server and client configs when a player connects
+        GolemancyItemGroup.register(); //add custom ItemGroup that contains all mod items including custom soulstones
         AutoConfig.register(ConfigurationHandler.class, GsonConfigSerializer::new); //register the AutoConfig handler - see GolemancyConfig for details
         LOGGER.info("Arise, my minions!");
     }

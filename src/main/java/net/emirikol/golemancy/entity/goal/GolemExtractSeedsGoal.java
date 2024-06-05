@@ -15,8 +15,7 @@ public class GolemExtractSeedsGoal extends GolemExtractItemGoal {
     @Override
     protected boolean canTake(ItemStack stack) {
         //An item is a seed if it is an AliasedBlockItem that places something which extends CropBlock or StemBlock.
-        if (stack.getItem() instanceof BlockItem) {
-            BlockItem item = (BlockItem) stack.getItem();
+        if (stack.getItem() instanceof BlockItem item) {
             boolean crop = item.getBlock() instanceof CropBlock;
             boolean stem = item.getBlock() instanceof StemBlock;
             boolean modSeed = ModSupport.isModdedSeed(stack);
