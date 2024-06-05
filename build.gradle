@@ -40,7 +40,8 @@ dependencies {
 	modImplementation libs.quilt.loader
 
 	modImplementation libs.quilted.fabric.api
-	modImplementation libs.bundles.cca
+	modImplementation include(libs.cca.base.get())
+	modImplementation include(libs.cca.entity.get())
 
 	modImplementation libs.modmenu
 	modImplementation(libs.cloth.config) {
