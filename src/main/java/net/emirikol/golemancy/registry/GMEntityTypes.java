@@ -1,6 +1,7 @@
 package net.emirikol.golemancy.registry;
 
 import net.emirikol.golemancy.GMIdentifier;
+import net.emirikol.golemancy.entity.AbstractGolemEntity;
 import net.emirikol.golemancy.entity.CarefulGolemEntity;
 import net.emirikol.golemancy.entity.CovetousGolemEntity;
 import net.emirikol.golemancy.entity.CuriousGolemEntity;
@@ -36,26 +37,30 @@ public class GMEntityTypes {
     private static final float GOLEM_WIDTH = 0.7f;
     private static final float GOLEM_HEIGHT = 1.30f;
     private static final EntityDimensions GOLEM_DIMENSIONS = EntityDimensions.fixed(GOLEM_WIDTH, GOLEM_HEIGHT);
-    public static final EntityType<CarefulGolemEntity> CAREFUL_GOLEM_ENTITY = create("golem_careful", QuiltEntityTypeBuilder.create(SpawnGroup.CREATURE, CarefulGolemEntity::new).setDimensions(GOLEM_DIMENSIONS).build());
-    public static final EntityType<CovetousGolemEntity> COVETOUS_GOLEM_ENTITY = create("golem_covetous", QuiltEntityTypeBuilder.create(SpawnGroup.CREATURE, CovetousGolemEntity::new).setDimensions(GOLEM_DIMENSIONS).build());
-    public static final EntityType<CuriousGolemEntity> CURIOUS_GOLEM_ENTITY = create("golem_curious", QuiltEntityTypeBuilder.create(SpawnGroup.CREATURE, CuriousGolemEntity::new).setDimensions(GOLEM_DIMENSIONS).build());
-    public static final EntityType<EntropicGolemEntity> ENTROPIC_GOLEM_ENTITY = create("golem_entropic", QuiltEntityTypeBuilder.create(SpawnGroup.CREATURE, EntropicGolemEntity::new).setDimensions(GOLEM_DIMENSIONS).build());
-    public static final EntityType<HungryGolemEntity> HUNGRY_GOLEM_ENTITY = create("golem_hungry", QuiltEntityTypeBuilder.create(SpawnGroup.CREATURE, HungryGolemEntity::new).setDimensions(GOLEM_DIMENSIONS).build());
-    public static final EntityType<IntrepidGolemEntity> INTREPID_GOLEM_ENTITY = create("golem_intrepid", QuiltEntityTypeBuilder.create(SpawnGroup.CREATURE, IntrepidGolemEntity::new).setDimensions(GOLEM_DIMENSIONS).build());
-    public static final EntityType<MarshyGolemEntity> MARSHY_GOLEM_ENTITY = create("golem_marshy", QuiltEntityTypeBuilder.create(SpawnGroup.CREATURE, MarshyGolemEntity::new).setDimensions(GOLEM_DIMENSIONS).build());
-    public static final EntityType<ParchedGolemEntity> PARCHED_GOLEM_ENTITY = create("golem_parched", QuiltEntityTypeBuilder.create(SpawnGroup.CREATURE, ParchedGolemEntity::new).setDimensions(GOLEM_DIMENSIONS).build());
-    public static final EntityType<PiousGolemEntity> PIOUS_GOLEM_ENTITY = create("golem_pious",  QuiltEntityTypeBuilder.create(SpawnGroup.CREATURE, PiousGolemEntity::new).setDimensions(GOLEM_DIMENSIONS).build());
-    public static final EntityType<RestlessGolemEntity> RESTLESS_GOLEM_ENTITY = create("golem_restless", QuiltEntityTypeBuilder.create(SpawnGroup.CREATURE, RestlessGolemEntity::new).setDimensions(GOLEM_DIMENSIONS).build());
-    public static final EntityType<RusticGolemEntity> RUSTIC_GOLEM_ENTITY = create("golem_rustic", QuiltEntityTypeBuilder.create(SpawnGroup.CREATURE, RusticGolemEntity::new).setDimensions(GOLEM_DIMENSIONS).build());
-    public static final EntityType<TactileGolemEntity> TACTILE_GOLEM_ENTITY = create("golem_tactile", QuiltEntityTypeBuilder.create(SpawnGroup.CREATURE, TactileGolemEntity::new).setDimensions(GOLEM_DIMENSIONS).build());
-    public static final EntityType<ValiantGolemEntity> VALIANT_GOLEM_ENTITY = create("golem_valiant", QuiltEntityTypeBuilder.create(SpawnGroup.CREATURE, ValiantGolemEntity::new).setDimensions(GOLEM_DIMENSIONS).build());
-    public static final EntityType<VerdantGolemEntity> VERDANT_GOLEM_ENTITY = create("golem_verdant", QuiltEntityTypeBuilder.create(SpawnGroup.CREATURE, VerdantGolemEntity::new).setDimensions(GOLEM_DIMENSIONS).build());
-    public static final EntityType<WeepingGolemEntity> WEEPING_GOLEM_ENTITY = create("golem_weeping", QuiltEntityTypeBuilder.create(SpawnGroup.CREATURE, WeepingGolemEntity::new).setDimensions(GOLEM_DIMENSIONS).build());
-    public static final EntityType<ClayballEntity> CLAYBALL = create("clayball", QuiltEntityTypeBuilder.<ClayballEntity>create(SpawnGroup.MISC, net.emirikol.golemancy.entity.projectile.ClayballEntity::new).setDimensions(EntityDimensions.fixed(0.25F, 0.25F)).maxBlockTrackingRange(4).trackingTickInterval(10).build());
+    public static final EntityType<CarefulGolemEntity> CAREFUL_GOLEM_ENTITY = createGolem("golem_careful", CarefulGolemEntity::new);
+    public static final EntityType<CovetousGolemEntity> COVETOUS_GOLEM_ENTITY = createGolem("golem_covetous", CovetousGolemEntity::new);
+    public static final EntityType<CuriousGolemEntity> CURIOUS_GOLEM_ENTITY = createGolem("golem_curious", CuriousGolemEntity::new);
+    public static final EntityType<EntropicGolemEntity> ENTROPIC_GOLEM_ENTITY = createGolem("golem_entropic", EntropicGolemEntity::new);
+    public static final EntityType<HungryGolemEntity> HUNGRY_GOLEM_ENTITY = createGolem("golem_hungry", HungryGolemEntity::new);
+    public static final EntityType<IntrepidGolemEntity> INTREPID_GOLEM_ENTITY = createGolem("golem_intrepid", IntrepidGolemEntity::new);
+    public static final EntityType<MarshyGolemEntity> MARSHY_GOLEM_ENTITY = createGolem("golem_marshy", MarshyGolemEntity::new);
+    public static final EntityType<ParchedGolemEntity> PARCHED_GOLEM_ENTITY = createGolem("golem_parched", ParchedGolemEntity::new);
+    public static final EntityType<PiousGolemEntity> PIOUS_GOLEM_ENTITY = createGolem("golem_pious",  PiousGolemEntity::new);
+    public static final EntityType<RestlessGolemEntity> RESTLESS_GOLEM_ENTITY = createGolem("golem_restless", RestlessGolemEntity::new);
+    public static final EntityType<RusticGolemEntity> RUSTIC_GOLEM_ENTITY = createGolem("golem_rustic", RusticGolemEntity::new);
+    public static final EntityType<TactileGolemEntity> TACTILE_GOLEM_ENTITY = createGolem("golem_tactile", TactileGolemEntity::new);
+    public static final EntityType<ValiantGolemEntity> VALIANT_GOLEM_ENTITY = createGolem("golem_valiant", ValiantGolemEntity::new);
+    public static final EntityType<VerdantGolemEntity> VERDANT_GOLEM_ENTITY = createGolem("golem_verdant", VerdantGolemEntity::new);
+    public static final EntityType<WeepingGolemEntity> WEEPING_GOLEM_ENTITY = createGolem("golem_weeping", WeepingGolemEntity::new);
+    public static final EntityType<ClayballEntity> CLAYBALL = create("clayball", QuiltEntityTypeBuilder.<ClayballEntity>create(SpawnGroup.MISC, ClayballEntity::new).setDimensions(EntityDimensions.fixed(0.25F, 0.25F)).maxBlockTrackingRange(4).trackingTickInterval(10).build());
 
     private static <T extends Entity> EntityType<T> create(String name, EntityType<T> type) {
         ENTITY_TYPES.put(new GMIdentifier(name), type);
         return type;
+    }
+
+    private static <T extends AbstractGolemEntity> EntityType<T> createGolem(String name, EntityType.EntityFactory<T> factory) {
+        return create(name, QuiltEntityTypeBuilder.createMob().spawnGroup(SpawnGroup.CREATURE).entityFactory(factory).defaultAttributes(AbstractGolemEntity.createGolemAttributes()).setDimensions(GOLEM_DIMENSIONS).build());
     }
 
     public static void register() {
