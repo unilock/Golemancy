@@ -16,7 +16,7 @@ import java.util.List;
 
 public class GolemancyItemGroup {
     public static final ItemGroup GOLEMANCY_ITEM_GROUP = FabricItemGroup.builder()
-                .name(Text.literal("itemGroup.golemancy.golemancy_items"))
+                .name(Text.translatable("itemGroup.golemancy.golemancy_items"))
                 .icon(() -> new ItemStack(GMObjects.CLAY_EFFIGY))
                 .entries((parameters, stacks) -> {
                     stacks.addStack(new ItemStack(GMObjects.SOUL_MIRROR));
