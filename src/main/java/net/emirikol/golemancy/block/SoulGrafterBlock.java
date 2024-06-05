@@ -29,8 +29,6 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.quiltmc.loader.api.minecraft.ClientOnly;
 
-import java.util.Random;
-
 public class SoulGrafterBlock extends BlockWithEntity {
     public static final BooleanProperty GRAFTING = BooleanProperty.of("grafting");
 
@@ -90,12 +88,13 @@ public class SoulGrafterBlock extends BlockWithEntity {
     }
 
     @ClientOnly
-    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+    @Override
+    public void randomDisplayTick(BlockState state, World world, BlockPos pos, RandomGenerator random) {
         if (state.get(GRAFTING)) {
             double d = (double) pos.getX() + 0.5D;
             double e = (double) pos.getY() + 0.75D;
             double f = (double) pos.getZ() + 0.5D;
-            Direction direction = Direction.random((RandomGenerator) random);
+            Direction direction = Direction.random(random);
             Direction.Axis axis = direction.getAxis();
             double h = random.nextDouble() * 0.6D - 0.3D;
             double i = axis == Direction.Axis.X ? (double) direction.getOffsetX() * 0.52D : h;
