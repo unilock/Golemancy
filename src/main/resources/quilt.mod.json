@@ -10,7 +10,8 @@
 			"contributors": {
 				"Emirikol": "Owner",
 				"DanikingRD": "Maintainer",
-				"Sunconure11": "Maintainer"
+				"Sunconure11": "Maintainer",
+				"unilock": "Maintainer"
 			},
 			"contact": {
 				"homepage": "https://www.curseforge.com/minecraft/mc-mods/golemancy",
@@ -29,19 +30,22 @@
 		"depends": [
 			{
 				"id": "quilt_loader",
-				"versions": ">=0.19.0"
+				"versions": "*"
 			},
 			{
 				"id": "quilted_fabric_api",
-				"versions": ">=7.0.0"
+				"versions": "*"
 			},
 			{
 				"id": "minecraft",
-				"versions": ">=1.20"
+				"versions": [
+					"1.20",
+					"1.20.1"
+				]
 			},
 			{
 				"id": "cloth-config",
-				"versions": ">=11.0.0"
+				"versions": "*"
 			}
 		]
 	},

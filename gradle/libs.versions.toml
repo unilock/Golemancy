@@ -1,14 +1,13 @@
 [versions]
-# The latest versions are available at https://lambdaurora.dev/tools/import_quilt.html
 minecraft = "1.20.1"
 quilt_mappings = "1.20.1+build.23"
 
-quilt_loom = "1.6.+"
-quilt_loader = "0.26.0"
+quilt_loom = "1.15.+"
+quilt_loader = "0.28.1"
 
-quilted_fabric_api = "7.5.0+0.91.0-1.20.1"
-cca = "5.2.2"
-cloth_config = "11.1.118"
+quilted_fabric_api = "7.6.0+0.92.2-1.20.1"
+cca = "5.2.3"
+cloth_config = "11.1.136"
 modmenu = "7.2.2"
 
 [libraries]
@@ -22,10 +21,6 @@ cca_base = { module = "dev.onyxstudios.cardinal-components-api:cardinal-componen
 cca_entity = { module = "dev.onyxstudios.cardinal-components-api:cardinal-components-entity", version.ref = "cca" }
 cloth_config = { module = "me.shedaniel.cloth:cloth-config-fabric", version.ref = "cloth_config" }
 modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
-
-# If you have multiple similar dependencies, you can declare a dependency bundle and reference it on the build script with "libs.bundles.example".
-[bundles]
-cca = [ "cca_base", "cca_entity" ]
 
 [plugins]
 quilt_loom = { id = "org.quiltmc.loom", version.ref = "quilt_loom" }

@@ -3,17 +3,12 @@ plugins {
 	alias libs.plugins.quilt.loom
 }
 
-base {
-	archivesName = project.archives_base_name
-}
-
 version = "$project.version+${libs.versions.minecraft.get()}"
-group = project.maven_group
 
 loom {
 	mods {
-		"golemancy" {
-			sourceSet("main")
+		'golemancy' {
+			sourceSet('main')
 		}
 	}
 }
@@ -36,24 +31,32 @@ repositories {
 
 dependencies {
 	minecraft libs.minecraft
-	mappings variantOf(libs.quilt.mappings) { classifier "intermediary-v2" }
+	mappings variantOf(libs.quilt.mappings) { classifier 'intermediary-v2' }
 	modImplementation libs.quilt.loader
 
 	modImplementation libs.quilted.fabric.api
-	modImplementation include(libs.cca.base.get())
-	modImplementation include(libs.cca.entity.get())
+	modImplementation(include(libs.cca.base.get())) {
+		exclude group: 'net.fabricmc.fabric-api'
+	}
+	modImplementation(include(libs.cca.entity.get())) {
+		exclude group: 'net.fabricmc.fabric-api'
+	}
 
-	modImplementation libs.modmenu
+	modImplementation(libs.modmenu) {
+		exclude group: 'net.fabricmc.fabric-api'
+	}
 	modImplementation(libs.cloth.config) {
-		exclude group: "net.fabricmc.fabric-api"
+		exclude group: 'net.fabricmc.fabric-api'
 	}
 }
 
 processResources {
-	inputs.properties 'version': version, 'group': project.group
+	def version = project.version
+	def group = project.group
+	inputs.properties 'version': version, 'group': group
 
 	filesMatching('quilt.mod.json') {
-		expand 'version': version, 'group': project.group
+		expand 'version': version, 'group': group
 	}
 }
 
@@ -71,15 +74,18 @@ java {
 
 // If you plan to use a different file for the license, don't forget to change the file name here!
 jar {
+	def projectName = project.name
+	inputs.property 'projectName', projectName
+
 	from('LICENSE') {
-		rename { "${it}_${base.archivesName.get()}" }
+		rename { "${it}_$projectName" }
 	}
 }
 
 // Configure the maven publication
 publishing {
 	publications {
-		mavenJava(MavenPublication) {
+		create('mavenJava', MavenPublication) {
 			from components.java
 		}
 	}
