@@ -6,6 +6,8 @@ import net.emirikol.golemancy.entity.goal.GolemFollowOwnerGoal;
 import net.emirikol.golemancy.entity.goal.GolemMoveToHomeGoal;
 import net.emirikol.golemancy.event.ConfigurationHandler;
 import net.emirikol.golemancy.registry.GMObjects;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -28,7 +30,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EntityView;
 import net.minecraft.world.World;
-import org.quiltmc.loader.api.minecraft.ClientOnly;
 
 public abstract class AbstractGolemEntity extends TameableEntity {
     private int strength, agility, vigor, smarts;
@@ -51,7 +52,7 @@ public abstract class AbstractGolemEntity extends TameableEntity {
     }
 
     public static DefaultAttributeContainer.Builder createGolemAttributes() {
-        return MobEntity.createAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25).add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0D).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0D);
+        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25).add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0D).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0D);
     }
 
     @Override
@@ -94,7 +95,7 @@ public abstract class AbstractGolemEntity extends TameableEntity {
     public boolean isInvulnerableTo(DamageSource source) {
         if (this.getMaterial() == GolemMaterial.OBSIDIAN) {
             //Obsidian golems are fireproof.
-            if (source.isTypeIn(DamageTypeTags.IS_FIRE)) return true;
+            if (source.isIn(DamageTypeTags.IS_FIRE)) return true;
         }
         return super.isInvulnerableTo(source);
     }
@@ -452,12 +453,12 @@ public abstract class AbstractGolemEntity extends TameableEntity {
     }
 
     @Override
-    public EntityView getEntityView() {
+    public EntityView method_48926() {
         return this.getWorld();
     }
 
     @Override
-    @ClientOnly
+    @Environment(EnvType.CLIENT)
     public void handleStatus(byte status) {
         switch (status) {
             case 4:
@@ -481,22 +482,22 @@ public abstract class AbstractGolemEntity extends TameableEntity {
         }
     }
 
-    @ClientOnly
+    @Environment(EnvType.CLIENT)
     public int getAttackTicksLeft() {
         return this.attackTicksLeft;
     }
 
-    @ClientOnly
+    @Environment(EnvType.CLIENT)
     public int getSwingTicksLeft() {
         return this.swingTicksLeft;
     }
 
-    @ClientOnly
+    @Environment(EnvType.CLIENT)
     public int getPrayTicksLeft() {
         return this.prayTicksLeft;
     }
 
-    @ClientOnly
+    @Environment(EnvType.CLIENT)
     public int getDanceTicksLeft() {
         return this.danceTicksLeft;
     }

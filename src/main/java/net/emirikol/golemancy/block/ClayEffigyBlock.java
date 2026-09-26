@@ -6,7 +6,6 @@ import net.emirikol.golemancy.genetics.Gene;
 import net.emirikol.golemancy.genetics.Genome;
 import net.emirikol.golemancy.genetics.SoulType;
 import net.emirikol.golemancy.item.SoulstoneFilled;
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -35,14 +34,14 @@ import net.minecraft.world.World;
 public class ClayEffigyBlock extends Block {
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
 
-    public ClayEffigyBlock(AbstractBlock.Settings settings) {
+    public ClayEffigyBlock(Settings settings) {
         super(settings);
         this.setDefaultState(((this.stateManager.getDefaultState()).with(FACING, Direction.NORTH)));
     }
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite());
+        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
     }
 
     @Override
@@ -98,7 +97,7 @@ public class ClayEffigyBlock extends Block {
             } //shouldn't throw an error, as this can happen w/ soulstones that have invalid data (i.e. "generic soulstone")
             AbstractGolemEntity entity = golemType.create(serverWorld, null, null, pos, SpawnReason.SPAWN_EGG, true, true);
             if (entity == null) {
-                throw new java.lang.RuntimeException("Attempt to create golem entity from soulstone returned NULL entity!");
+                throw new RuntimeException("Attempt to create golem entity from soulstone returned NULL entity!");
             }
             //Update tracked values from genome.
             entity.setGolemStats(strengthGene.getActive(), agilityGene.getActive(), vigorGene.getActive(), smartsGene.getActive());

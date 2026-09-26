@@ -23,7 +23,7 @@ public class GolemLookAtHeldBlockGoal extends Goal {
     public GolemLookAtHeldBlockGoal(AbstractGolemEntity entity, float maxYDifference) {
         this.entity = entity;
         this.maxYDifference = maxYDifference;
-        this.setControls(EnumSet.of(Goal.Control.LOOK));
+        this.setControls(EnumSet.of(Control.LOOK));
     }
 
     public boolean canStart() {

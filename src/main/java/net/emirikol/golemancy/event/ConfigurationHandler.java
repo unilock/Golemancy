@@ -5,10 +5,10 @@ import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry.Gui.Tooltip;
 import net.emirikol.golemancy.Golemancy;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.PacketByteBuf;
-import org.quiltmc.qsl.networking.api.PacketByteBufs;
-import org.quiltmc.qsl.networking.api.ServerPlayConnectionEvents;
-import org.quiltmc.qsl.networking.api.ServerPlayNetworking;
 
 @Config(name = "golemancy")
 public class ConfigurationHandler implements ConfigData {

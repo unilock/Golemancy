@@ -5,6 +5,8 @@ import net.emirikol.golemancy.registry.GMObjects;
 import net.emirikol.golemancy.screen.slot.FilledSoulstoneSlot;
 import net.emirikol.golemancy.screen.slot.OutputSlot;
 import net.emirikol.golemancy.screen.slot.RestrictedSlot;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -15,7 +17,6 @@ import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
-import org.quiltmc.loader.api.minecraft.ClientOnly;
 
 public class SoulGrafterScreenHandler extends ScreenHandler {
     private final Inventory inventory;
@@ -85,7 +86,7 @@ public class SoulGrafterScreenHandler extends ScreenHandler {
 
     //Shift + Player Inv Slot
     @Override
-    public ItemStack quickTransfer(PlayerEntity player, int invSlot) {
+    public ItemStack quickMove(PlayerEntity player, int invSlot) {
         ItemStack newStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(invSlot);
         if (slot.hasStack()) {
@@ -100,7 +101,7 @@ public class SoulGrafterScreenHandler extends ScreenHandler {
             }
 
             if (originalStack.isEmpty()) {
-                slot.setStack(ItemStack.EMPTY);
+                slot.setStackNoCallbacks(ItemStack.EMPTY);
             } else {
                 slot.markDirty();
             }
@@ -109,12 +110,12 @@ public class SoulGrafterScreenHandler extends ScreenHandler {
         return newStack;
     }
 
-    @ClientOnly
+    @Environment(EnvType.CLIENT)
     public int getGraftTime() {
         return this.propertyDelegate.get(0);
     }
 
-    @ClientOnly
+    @Environment(EnvType.CLIENT)
     public int getFuelTime() {
         return this.propertyDelegate.get(1);
     }

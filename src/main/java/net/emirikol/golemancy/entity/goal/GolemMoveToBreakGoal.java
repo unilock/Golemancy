@@ -4,7 +4,6 @@ import net.emirikol.golemancy.entity.AbstractGolemEntity;
 import net.emirikol.golemancy.network.Particles;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
 import net.minecraft.util.math.BlockPos;
 
@@ -18,7 +17,7 @@ public abstract class GolemMoveToBreakGoal extends GolemMoveGoal {
 
     public GolemMoveToBreakGoal(AbstractGolemEntity entity, float maxYDifference) {
         super(entity, maxYDifference);
-        this.setControls(EnumSet.of(Goal.Control.MOVE, Goal.Control.LOOK));
+        this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
     }
 
     @Override

@@ -5,7 +5,6 @@ import net.emirikol.golemancy.util.GMUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
@@ -20,7 +19,7 @@ public class GolemMoveToPlantGoal extends GolemMoveGoal {
 
     public GolemMoveToPlantGoal(AbstractGolemEntity entity, float maxYDifference) {
         super(entity, maxYDifference);
-        this.setControls(EnumSet.of(Goal.Control.MOVE, Goal.Control.LOOK));
+        this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
     }
 
     @Override

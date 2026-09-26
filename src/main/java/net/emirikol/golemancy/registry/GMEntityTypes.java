@@ -18,6 +18,7 @@ import net.emirikol.golemancy.entity.ValiantGolemEntity;
 import net.emirikol.golemancy.entity.VerdantGolemEntity;
 import net.emirikol.golemancy.entity.WeepingGolemEntity;
 import net.emirikol.golemancy.entity.projectile.ClayballEntity;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
@@ -25,7 +26,6 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import org.quiltmc.qsl.entity.api.QuiltEntityTypeBuilder;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -52,7 +52,7 @@ public class GMEntityTypes {
     public static final EntityType<ValiantGolemEntity> VALIANT_GOLEM_ENTITY = createGolem("golem_valiant", ValiantGolemEntity::new);
     public static final EntityType<VerdantGolemEntity> VERDANT_GOLEM_ENTITY = createGolem("golem_verdant", VerdantGolemEntity::new);
     public static final EntityType<WeepingGolemEntity> WEEPING_GOLEM_ENTITY = createGolem("golem_weeping", WeepingGolemEntity::new);
-    public static final EntityType<ClayballEntity> CLAYBALL = create("clayball", QuiltEntityTypeBuilder.<ClayballEntity>create(SpawnGroup.MISC, ClayballEntity::new).setDimensions(EntityDimensions.fixed(0.25F, 0.25F)).maxBlockTrackingRange(4).trackingTickInterval(10).build());
+    public static final EntityType<ClayballEntity> CLAYBALL = create("clayball", FabricEntityTypeBuilder.<ClayballEntity>create(SpawnGroup.MISC, ClayballEntity::new).dimensions(EntityDimensions.fixed(0.25F, 0.25F)).trackRangeBlocks(4).trackedUpdateRate(10).build());
 
     private static <T extends Entity> EntityType<T> create(String name, EntityType<T> type) {
         ENTITY_TYPES.put(new GMIdentifier(name), type);
@@ -60,7 +60,7 @@ public class GMEntityTypes {
     }
 
     private static <T extends AbstractGolemEntity> EntityType<T> createGolem(String name, EntityType.EntityFactory<T> factory) {
-        return create(name, QuiltEntityTypeBuilder.createMob().spawnGroup(SpawnGroup.CREATURE).entityFactory(factory).defaultAttributes(AbstractGolemEntity.createGolemAttributes()).setDimensions(GOLEM_DIMENSIONS).build());
+        return create(name, FabricEntityTypeBuilder.createMob().spawnGroup(SpawnGroup.CREATURE).entityFactory(factory).defaultAttributes(AbstractGolemEntity::createGolemAttributes).dimensions(GOLEM_DIMENSIONS).build());
     }
 
     public static void register() {

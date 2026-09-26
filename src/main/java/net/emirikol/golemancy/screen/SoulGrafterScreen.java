@@ -1,7 +1,7 @@
 package net.emirikol.golemancy.screen;
 
 import net.emirikol.golemancy.event.ConfigurationHandler;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.ScreenHandler;
@@ -27,7 +27,7 @@ public class SoulGrafterScreen extends HandledScreen<ScreenHandler> {
     }
 
     @Override
-    protected void drawBackground(GuiGraphics graphics, float delta, int mouseX, int mouseY) {
+    protected void drawBackground(DrawContext graphics, float delta, int mouseX, int mouseY) {
         int x = (width - backgroundWidth) / 2;
         int y = (height - backgroundHeight) / 2;
         graphics.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
@@ -49,7 +49,7 @@ public class SoulGrafterScreen extends HandledScreen<ScreenHandler> {
     }
 
     @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
+    public void render(DrawContext graphics, int mouseX, int mouseY, float delta) {
         renderBackground(graphics);
         super.render(graphics, mouseX, mouseY, delta);
         drawMouseoverTooltip(graphics, mouseX, mouseY);

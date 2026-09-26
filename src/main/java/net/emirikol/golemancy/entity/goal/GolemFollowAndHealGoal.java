@@ -33,7 +33,7 @@ public class GolemFollowAndHealGoal extends Goal {
         this.entity = entity;
         this.navigation = this.entity.getNavigation();
         this.canHealOwner = canHealOwner;
-        this.setControls(EnumSet.of(Goal.Control.MOVE, Goal.Control.LOOK));
+        this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
         if (!(this.navigation instanceof MobNavigation) && !(this.navigation instanceof BirdNavigation)) {
             throw new IllegalArgumentException("Unsupported mob type for GolemFollowAndHealGoal");
         }
@@ -72,7 +72,7 @@ public class GolemFollowAndHealGoal extends Goal {
     @Override
     public void tick() {
         //Look at friend.
-        this.entity.getLookControl().lookAt(this.friend, 10.0F, (float) this.entity.getLookPitchSpeed());
+        this.entity.getLookControl().lookAt(this.friend, 10.0F, (float) this.entity.getMaxLookPitchChange());
         //Try to heal friend.
         if (this.isHealing()) {
             this.healingTimer--;
@@ -93,7 +93,7 @@ public class GolemFollowAndHealGoal extends Goal {
     }
 
     @Override
-    public boolean requiresUpdateEveryTick() {
+    public boolean shouldRunEveryTick() {
         return true;
     }
     public boolean findTarget() {

@@ -18,8 +18,6 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import org.quiltmc.qsl.block.extensions.api.QuiltBlockSettings;
-import org.quiltmc.qsl.item.setting.api.QuiltItemSettings;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -37,7 +35,7 @@ public class GMObjects {
     public static final Block CLAY_EFFIGY = create("clay_effigy", new ClayEffigyBlock(buildEffigy()));
     public static final Block TERRACOTTA_EFFIGY = create("terracotta_effigy", new TerracottaEffigyBlock(buildEffigy()));
     public static final Block OBSIDIAN_EFFIGY = create("obsidian_effigy", new ObsidianEffigyBlock(buildEffigy()));
-    public static final Block SOUL_GRAFTER = create("soul_grafter", new SoulGrafterBlock(QuiltBlockSettings.create().mapColor(MapColor.STONE).hardness(4.0F).strength(5.0F, 1200.0F).requiresTool()));
+    public static final Block SOUL_GRAFTER = create("soul_grafter", new SoulGrafterBlock(AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).hardness(4.0F).strength(5.0F, 1200.0F).requiresTool()));
 
     private static <T extends Item> T create(String path, T item) {
         ITEMS.put(new GMIdentifier(path), item);
@@ -49,11 +47,11 @@ public class GMObjects {
         BLOCKS.put(id, block);
         return block;
     }
-    private static QuiltItemSettings build() {
-        return new QuiltItemSettings();
+    private static Item.Settings build() {
+        return new Item.Settings();
     }
     private static AbstractBlock.Settings buildEffigy() {
-        return QuiltBlockSettings.create().mapColor(MapColor.NONE).collidable(false).nonSolid(true).opaque(false).pistonBehavior(PistonBehavior.DESTROY).strength(0.6F);
+        return AbstractBlock.Settings.create().mapColor(MapColor.CLEAR).noCollision().notSolid().nonOpaque().pistonBehavior(PistonBehavior.DESTROY).strength(0.6F);
     }
     public static void register() {
         ITEMS.keySet().forEach(entry -> Registry.register(Registries.ITEM, entry, ITEMS.get(entry)));

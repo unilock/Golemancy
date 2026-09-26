@@ -2,7 +2,6 @@ package net.emirikol.golemancy.entity.goal;
 
 import net.emirikol.golemancy.entity.AbstractGolemEntity;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
@@ -17,7 +16,7 @@ public class GolemMoveToFluidGoal extends GolemMoveGoal {
 
     public GolemMoveToFluidGoal(AbstractGolemEntity entity, float maxYDifference) {
         super(entity, maxYDifference);
-        this.setControls(EnumSet.of(Goal.Control.MOVE, Goal.Control.LOOK));
+        this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
     }
 
     @Override
@@ -46,11 +45,11 @@ public class GolemMoveToFluidGoal extends GolemMoveGoal {
 
         if (vessel.getItem() == Items.BUCKET) {
             //Buckets should be able to drain any fluid.
-            return fluidState.isSource() && !fluidState.isEmpty() && super.isTargetPos(pos);
+            return fluidState.isStill() && !fluidState.isEmpty() && super.isTargetPos(pos);
         }
         if (vessel.getItem() == Items.GLASS_BOTTLE) {
             //Glass bottles can only drain water.
-            return fluidState.getFluid() == Fluids.WATER && fluidState.isSource() && !fluidState.isEmpty() && super.isTargetPos(pos);
+            return fluidState.getFluid() == Fluids.WATER && fluidState.isStill() && !fluidState.isEmpty() && super.isTargetPos(pos);
         }
 
         return false;

@@ -12,6 +12,9 @@ import net.emirikol.golemancy.registry.GMEntityTypes;
 import net.emirikol.golemancy.registry.GMObjects;
 import net.emirikol.golemancy.screen.SoulGrafterScreen;
 import net.emirikol.golemancy.screen.SoulMirrorScreen;
+import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.MinecraftClient;
@@ -25,10 +28,6 @@ import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import org.quiltmc.loader.api.ModContainer;
-import org.quiltmc.qsl.base.api.entrypoint.client.ClientModInitializer;
-import org.quiltmc.qsl.block.extensions.api.client.BlockRenderLayerMap;
-import org.quiltmc.qsl.networking.api.client.ClientPlayNetworking;
 
 import java.util.UUID;
 
@@ -37,14 +36,13 @@ public class GolemancyClient implements ClientModInitializer {
     public static final EntityModelLayer MODEL_GOLEM_LAYER = new EntityModelLayer(new Identifier("golemancy", "clay_golem"), "main");
 
     @Override
-    public void onInitializeClient(ModContainer container) {
+    public void onInitializeClient() {
         registerEntities();
         registerParticles();
         registerSpawnPacket();
         registerConfigPacket();
 
-        BlockRenderLayerMap.put(RenderLayer.getCutout(), GMObjects.CLAY_EFFIGY);
-        BlockRenderLayerMap.put(RenderLayer.getCutout(), GMObjects.TERRACOTTA_EFFIGY);
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), GMObjects.CLAY_EFFIGY, GMObjects.TERRACOTTA_EFFIGY);
         EntityModelLayerRegistry.registerModelLayer(MODEL_GOLEM_LAYER, GolemEntityModel::getTexturedModelData);
     }
 

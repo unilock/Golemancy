@@ -2,7 +2,6 @@ package net.emirikol.golemancy.entity.goal;
 
 import net.emirikol.golemancy.entity.AbstractGolemEntity;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,7 +17,7 @@ public class GolemMoveToSortGoal extends GolemMoveGoal {
 
     public GolemMoveToSortGoal(AbstractGolemEntity entity, float maxYDifference) {
         super(entity, maxYDifference);
-        this.setControls(EnumSet.of(Goal.Control.MOVE, Goal.Control.LOOK));
+        this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
     }
 
     @Override

@@ -1,5 +1,8 @@
 package net.emirikol.golemancy.network;
 
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.registry.Registries;
@@ -8,9 +11,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import org.quiltmc.qsl.networking.api.PacketByteBufs;
-import org.quiltmc.qsl.networking.api.PlayerLookup;
-import org.quiltmc.qsl.networking.api.ServerPlayNetworking;
 
 public class SpawnPacket {
     public static final Identifier SPAWN_PACKET_ID = new Identifier("golemancy", "spawn_packet");

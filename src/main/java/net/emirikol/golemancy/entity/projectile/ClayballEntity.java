@@ -3,6 +3,8 @@ package net.emirikol.golemancy.entity.projectile;
 import net.emirikol.golemancy.entity.AbstractGolemEntity;
 import net.emirikol.golemancy.network.SpawnPacket;
 import net.emirikol.golemancy.registry.GMEntityTypes;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -18,7 +20,6 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
-import org.quiltmc.loader.api.minecraft.ClientOnly;
 
 public class ClayballEntity extends ThrownItemEntity {
     private double damage;
@@ -43,12 +44,12 @@ public class ClayballEntity extends ThrownItemEntity {
         this.damage = damage;
     }
 
-    @ClientOnly
+    @Environment(EnvType.CLIENT)
     private ParticleEffect getParticleParameters() {
         return new ItemStackParticleEffect(ParticleTypes.ITEM, new ItemStack(this.getDefaultItem()));
     }
 
-    @ClientOnly
+    @Environment(EnvType.CLIENT)
     public void handleStatus(byte status) {
         if (status == 3) {
             ParticleEffect particleEffect = this.getParticleParameters();

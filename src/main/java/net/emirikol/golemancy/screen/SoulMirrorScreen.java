@@ -1,7 +1,7 @@
 package net.emirikol.golemancy.screen;
 
 import net.emirikol.golemancy.genetics.SerializedGenome;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.ScreenHandler;
@@ -29,60 +29,60 @@ public class SoulMirrorScreen extends HandledScreen<ScreenHandler> {
     }
 
     @Override
-    protected void drawBackground(GuiGraphics graphics, float delta, int mouseX, int mouseY) {
+    protected void drawBackground(DrawContext graphics, float delta, int mouseX, int mouseY) {
         int x = (width - backgroundWidth) / 2;
         int y = (height - backgroundHeight) / 2;
         graphics.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
     }
 
     @Override
-    protected void drawForeground(GuiGraphics graphics, int mouseX, int mouseY) {
+    protected void drawForeground(DrawContext graphics, int mouseX, int mouseY) {
         //Get genome data from server and deserialize.
         String soulData = ((SoulMirrorScreenHandler) this.handler).getSoulData();
         SerializedGenome serializedGenome = new SerializedGenome(soulData);
         //Draw title.
         Text titleText = Text.translatable("item.golemancy.soul_mirror");
         int x = (backgroundWidth - textRenderer.getWidth(titleText)) / 2;
-        graphics.drawShadowedText(this.textRenderer, titleText, x, TITLE_Y, 4210752);
+        graphics.drawTextWithShadow(this.textRenderer, titleText, x, TITLE_Y, 4210752);
         //Draw column headers.
         Text activeText = Text.translatable("text.golemancy.active_column");
         Text dormantText = Text.translatable("text.golemancy.dormant_column");
-        graphics.drawShadowedText(this.textRenderer, activeText, COLUMN_DOM_X, COLUMN_HEADER_Y, 0xff0000);
-        graphics.drawShadowedText(this.textRenderer, dormantText, COLUMN_REC_X, COLUMN_HEADER_Y, 0x00acff);
+        graphics.drawTextWithShadow(this.textRenderer, activeText, COLUMN_DOM_X, COLUMN_HEADER_Y, 0xff0000);
+        graphics.drawTextWithShadow(this.textRenderer, dormantText, COLUMN_REC_X, COLUMN_HEADER_Y, 0x00acff);
         //Draw type row.
         Text typeText = Text.translatable("text.golemancy.type");
-        graphics.drawShadowedText(this.textRenderer, typeText, ROW_START_X, TYPE_ROW_Y, 4210752);
-        graphics.drawShadowedText(this.textRenderer, typeToText(serializedGenome.activeAlleles.get("type")), COLUMN_DOM_X, TYPE_ROW_Y, 4210752);
-        graphics.drawShadowedText(this.textRenderer, typeToText(serializedGenome.dormantAlleles.get("type")), COLUMN_REC_X, TYPE_ROW_Y, 4210752);
+        graphics.drawTextWithShadow(this.textRenderer, typeText, ROW_START_X, TYPE_ROW_Y, 4210752);
+        graphics.drawTextWithShadow(this.textRenderer, typeToText(serializedGenome.activeAlleles.get("type")), COLUMN_DOM_X, TYPE_ROW_Y, 4210752);
+        graphics.drawTextWithShadow(this.textRenderer, typeToText(serializedGenome.dormantAlleles.get("type")), COLUMN_REC_X, TYPE_ROW_Y, 4210752);
         //Draw potency row.
         Text potencyText = Text.translatable("text.golemancy.potency");
-        graphics.drawShadowedText(this.textRenderer, potencyText, ROW_START_X, POTENCY_ROW_Y, 4210752);
-        graphics.drawShadowedText(this.textRenderer, potencyToText(serializedGenome.activeAlleles.get("potency")), COLUMN_DOM_X, POTENCY_ROW_Y, 4210752);
-        graphics.drawShadowedText(this.textRenderer, potencyToText(serializedGenome.dormantAlleles.get("potency")), COLUMN_REC_X, POTENCY_ROW_Y, 4210752);
+        graphics.drawTextWithShadow(this.textRenderer, potencyText, ROW_START_X, POTENCY_ROW_Y, 4210752);
+        graphics.drawTextWithShadow(this.textRenderer, potencyToText(serializedGenome.activeAlleles.get("potency")), COLUMN_DOM_X, POTENCY_ROW_Y, 4210752);
+        graphics.drawTextWithShadow(this.textRenderer, potencyToText(serializedGenome.dormantAlleles.get("potency")), COLUMN_REC_X, POTENCY_ROW_Y, 4210752);
         //Draw strength row.
         Text strengthText = Text.translatable("text.golemancy.strength");
-        graphics.drawShadowedText(this.textRenderer, strengthText, ROW_START_X, STRENGTH_ROW_Y, 4210752);
-        graphics.drawShadowedText(this.textRenderer, geneToText(serializedGenome.activeAlleles.get("strength")), COLUMN_DOM_X, STRENGTH_ROW_Y, 4210752);
-        graphics.drawShadowedText(this.textRenderer, geneToText(serializedGenome.dormantAlleles.get("strength")), COLUMN_REC_X, STRENGTH_ROW_Y, 4210752);
+        graphics.drawTextWithShadow(this.textRenderer, strengthText, ROW_START_X, STRENGTH_ROW_Y, 4210752);
+        graphics.drawTextWithShadow(this.textRenderer, geneToText(serializedGenome.activeAlleles.get("strength")), COLUMN_DOM_X, STRENGTH_ROW_Y, 4210752);
+        graphics.drawTextWithShadow(this.textRenderer, geneToText(serializedGenome.dormantAlleles.get("strength")), COLUMN_REC_X, STRENGTH_ROW_Y, 4210752);
         //Draw agility row.
         Text agilityText = Text.translatable("text.golemancy.agility");
-        graphics.drawShadowedText(this.textRenderer, agilityText, ROW_START_X, AGILITY_ROW_Y, 4210752);
-        graphics.drawShadowedText(this.textRenderer, geneToText(serializedGenome.activeAlleles.get("agility")), COLUMN_DOM_X, AGILITY_ROW_Y, 4210752);
-        graphics.drawShadowedText(this.textRenderer, geneToText(serializedGenome.dormantAlleles.get("agility")), COLUMN_REC_X, AGILITY_ROW_Y, 4210752);
+        graphics.drawTextWithShadow(this.textRenderer, agilityText, ROW_START_X, AGILITY_ROW_Y, 4210752);
+        graphics.drawTextWithShadow(this.textRenderer, geneToText(serializedGenome.activeAlleles.get("agility")), COLUMN_DOM_X, AGILITY_ROW_Y, 4210752);
+        graphics.drawTextWithShadow(this.textRenderer, geneToText(serializedGenome.dormantAlleles.get("agility")), COLUMN_REC_X, AGILITY_ROW_Y, 4210752);
         //Draw vigor row.
         Text vigorText = Text.translatable("text.golemancy.vigor");
-        graphics.drawShadowedText(this.textRenderer, vigorText, ROW_START_X, VIGOR_ROW_Y, 4210752);
-        graphics.drawShadowedText(this.textRenderer, geneToText(serializedGenome.activeAlleles.get("vigor")), COLUMN_DOM_X, VIGOR_ROW_Y, 4210752);
-        graphics.drawShadowedText(this.textRenderer, geneToText(serializedGenome.dormantAlleles.get("vigor")), COLUMN_REC_X, VIGOR_ROW_Y, 4210752);
+        graphics.drawTextWithShadow(this.textRenderer, vigorText, ROW_START_X, VIGOR_ROW_Y, 4210752);
+        graphics.drawTextWithShadow(this.textRenderer, geneToText(serializedGenome.activeAlleles.get("vigor")), COLUMN_DOM_X, VIGOR_ROW_Y, 4210752);
+        graphics.drawTextWithShadow(this.textRenderer, geneToText(serializedGenome.dormantAlleles.get("vigor")), COLUMN_REC_X, VIGOR_ROW_Y, 4210752);
         //Draw smarts row.
         Text smartsText = Text.translatable("text.golemancy.smarts");
-        graphics.drawShadowedText(this.textRenderer, smartsText, ROW_START_X, SMARTS_ROW_Y, 4210752);
-        graphics.drawShadowedText(this.textRenderer, geneToText(serializedGenome.activeAlleles.get("smarts")), COLUMN_DOM_X, SMARTS_ROW_Y, 4210752);
-        graphics.drawShadowedText(this.textRenderer, geneToText(serializedGenome.dormantAlleles.get("smarts")), COLUMN_REC_X, SMARTS_ROW_Y, 4210752);
+        graphics.drawTextWithShadow(this.textRenderer, smartsText, ROW_START_X, SMARTS_ROW_Y, 4210752);
+        graphics.drawTextWithShadow(this.textRenderer, geneToText(serializedGenome.activeAlleles.get("smarts")), COLUMN_DOM_X, SMARTS_ROW_Y, 4210752);
+        graphics.drawTextWithShadow(this.textRenderer, geneToText(serializedGenome.dormantAlleles.get("smarts")), COLUMN_REC_X, SMARTS_ROW_Y, 4210752);
     }
 
     @Override
-    public void render(GuiGraphics matrices, int mouseX, int mouseY, float delta) {
+    public void render(DrawContext matrices, int mouseX, int mouseY, float delta) {
         renderBackground(matrices);
         super.render(matrices, mouseX, mouseY, delta);
         drawMouseoverTooltip(matrices, mouseX, mouseY);

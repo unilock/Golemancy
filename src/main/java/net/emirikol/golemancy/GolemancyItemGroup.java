@@ -16,16 +16,16 @@ import java.util.List;
 
 public class GolemancyItemGroup {
     public static final ItemGroup GOLEMANCY_ITEM_GROUP = FabricItemGroup.builder()
-                .name(Text.translatable("itemGroup.golemancy.golemancy_items"))
+                .displayName(Text.translatable("itemGroup.golemancy.golemancy_items"))
                 .icon(() -> new ItemStack(GMObjects.CLAY_EFFIGY))
                 .entries((parameters, stacks) -> {
-                    stacks.addStack(new ItemStack(GMObjects.SOUL_MIRROR));
-                    stacks.addStack(new ItemStack(GMObjects.SOUL_GRAFTER));
-                    stacks.addStack(new ItemStack(GMObjects.GOLEM_WAND));
-                    stacks.addStack(new ItemStack(GMObjects.CLAY_EFFIGY));
-                    stacks.addStack(new ItemStack(GMObjects.TERRACOTTA_EFFIGY));
-                    stacks.addStack(new ItemStack(GMObjects.OBSIDIAN_EFFIGY));
-                    stacks.addStack(new ItemStack(GMObjects.SOULSTONE_EMPTY));
+                    stacks.add(new ItemStack(GMObjects.SOUL_MIRROR));
+                    stacks.add(new ItemStack(GMObjects.SOUL_GRAFTER));
+                    stacks.add(new ItemStack(GMObjects.GOLEM_WAND));
+                    stacks.add(new ItemStack(GMObjects.CLAY_EFFIGY));
+                    stacks.add(new ItemStack(GMObjects.TERRACOTTA_EFFIGY));
+                    stacks.add(new ItemStack(GMObjects.OBSIDIAN_EFFIGY));
+                    stacks.add(new ItemStack(GMObjects.SOULSTONE_EMPTY));
                     List<Genome> genomes = Arrays.asList(
                             //Natural genomes
                             Genomes.creativeGenome(SoulTypes.COVETOUS),
@@ -48,7 +48,7 @@ public class GolemancyItemGroup {
                     for (Genome genome : genomes) {
                         ItemStack stack = new ItemStack(GMObjects.SOULSTONE_FILLED);
                         genome.toItemStack(stack);
-                        stacks.addStack(stack);
+                        stacks.add(stack);
                     }
                 }).build();
 

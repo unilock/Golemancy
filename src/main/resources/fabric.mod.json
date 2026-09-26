@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "id": "golemancy",
+  "version": "${version}",
+  "name": "Golemancy",
+  "description": "Capture the souls of mobs, breed them, and use them to create faithful golem servants to do your bidding.",
+  "authors": [
+    "Emirikol"
+  ],
+  "contributors": [
+    "DanikingRD",
+    "Sunconure11",
+    "unilock"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/golemancy",
+    "issues": "https://github.com/emirik0l/Golemancy/issues",
+    "sources": "https://github.com/emirik0l/Golemancy"
+  },
+  "license": "LGPL-3.0-only",
+  "icon": "assets/golemancy/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.emirikol.golemancy.Golemancy"
+    ],
+    "client": [
+      "net.emirikol.golemancy.GolemancyClient"
+    ],
+    "cardinal-components-entity": [
+      "net.emirikol.golemancy.GolemancyComponents"
+    ],
+    "modmenu": [
+      "net.emirikol.golemancy.GolemancyModMenu"
+    ]
+  },
+  "depends": {
+    "fabricloader": "*",
+    "minecraft": [
+      "1.20",
+      "1.20.1"
+    ],
+    "fabric-api": "*",
+    "cloth-config": "*"
+  },
+  "custom": {
+    "cardinal-components": [
+      "golemancy:golem"
+    ]
+  }
+}

@@ -1,6 +1,11 @@
 package net.emirikol.golemancy.network;
 
 import net.emirikol.golemancy.GMIdentifier;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
@@ -13,11 +18,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.random.RandomGenerator;
-import org.quiltmc.loader.api.minecraft.ClientOnly;
-import org.quiltmc.qsl.networking.api.PacketByteBufs;
-import org.quiltmc.qsl.networking.api.PlayerLookup;
-import org.quiltmc.qsl.networking.api.ServerPlayNetworking;
+import net.minecraft.util.math.random.Random;
 
 public class Particles {
     public static final Identifier HEAL_PARTICLE_ID = new GMIdentifier("heal_particle");
@@ -64,10 +65,10 @@ public class Particles {
         }
     }
 
-    @ClientOnly
+    @Environment(EnvType.CLIENT)
     public static void spawnHealParticle(BlockPos pos) {
         assert MinecraftClient.getInstance().world != null;
-        RandomGenerator rand = MinecraftClient.getInstance().world.getRandom();
+        Random rand = MinecraftClient.getInstance().world.getRandom();
         for (int i = 0; i < 15; i++) {
             double d = 0.5D;
             double m = (double) pos.getX() + rand.nextDouble() * d;
@@ -80,10 +81,10 @@ public class Particles {
         }
     }
 
-    @ClientOnly
+    @Environment(EnvType.CLIENT)
     public static void spawnSmokeParticle(BlockPos pos) {
         assert MinecraftClient.getInstance().world != null;
-        RandomGenerator rand = MinecraftClient.getInstance().world.getRandom();
+        Random rand = MinecraftClient.getInstance().world.getRandom();
         for (int i = 0; i < 15; i++) {
             double d = 0.5D;
             double m = (double) pos.getX() + rand.nextDouble() * d;
@@ -96,10 +97,10 @@ public class Particles {
         }
     }
 
-    @ClientOnly
+    @Environment(EnvType.CLIENT)
     public static void spawnFoodParticle(BlockPos pos, Entity entity) {
         assert MinecraftClient.getInstance().world != null;
-        RandomGenerator rand =  MinecraftClient.getInstance().world.getRandom();
+        Random rand =  MinecraftClient.getInstance().world.getRandom();
         if (entity instanceof LivingEntity) {
             ItemStack stack = ((LivingEntity) entity).getEquippedStack(EquipmentSlot.MAINHAND);
             for (int i = 0; i < 15; i++) {

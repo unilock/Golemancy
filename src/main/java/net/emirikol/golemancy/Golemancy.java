@@ -10,16 +10,14 @@ import net.emirikol.golemancy.registry.GMEntityTypes;
 import net.emirikol.golemancy.registry.GMObjects;
 import net.emirikol.golemancy.screen.SoulGrafterScreenHandler;
 import net.emirikol.golemancy.screen.SoulMirrorScreenHandler;
+import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.feature_flags.FeatureFlags;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
-import org.quiltmc.loader.api.ModContainer;
-import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
-import org.quiltmc.qsl.block.entity.api.QuiltBlockEntityTypeBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,13 +25,13 @@ public class Golemancy implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("Golemancy");
     public static final Identifier CONFIG_PACKET_ID = new GMIdentifier("config_packet");
 
-    public static final BlockEntityType<SoulGrafterBlockEntity> SOUL_GRAFTER_ENTITY = QuiltBlockEntityTypeBuilder.create(SoulGrafterBlockEntity::new, GMObjects.SOUL_GRAFTER).build(null);
-    public static final ScreenHandlerType<SoulGrafterScreenHandler> SOUL_GRAFTER_SCREEN_HANDLER =  Registry.register(Registries.SCREEN_HANDLER_TYPE, new GMIdentifier("soul_grafter"), new ScreenHandlerType<>(SoulGrafterScreenHandler::new, FeatureFlags.DEFAULT_SET));
-    public static final ExtendedScreenHandlerType<SoulMirrorScreenHandler> SOUL_MIRROR_SCREEN_HANDLER = Registry.register(Registries.SCREEN_HANDLER_TYPE, new GMIdentifier("soul_mirror"), new ExtendedScreenHandlerType<>(SoulMirrorScreenHandler::new));
+    public static final BlockEntityType<SoulGrafterBlockEntity> SOUL_GRAFTER_ENTITY = BlockEntityType.Builder.create(SoulGrafterBlockEntity::new, GMObjects.SOUL_GRAFTER).build(null);
+    public static final ScreenHandlerType<SoulGrafterScreenHandler> SOUL_GRAFTER_SCREEN_HANDLER =  Registry.register(Registries.SCREEN_HANDLER, new GMIdentifier("soul_grafter"), new ScreenHandlerType<>(SoulGrafterScreenHandler::new, FeatureFlags.VANILLA_FEATURES));
+    public static final ExtendedScreenHandlerType<SoulMirrorScreenHandler> SOUL_MIRROR_SCREEN_HANDLER = Registry.register(Registries.SCREEN_HANDLER, new GMIdentifier("soul_mirror"), new ExtendedScreenHandlerType<>(SoulMirrorScreenHandler::new));
 
 
     @Override
-    public void onInitialize(ModContainer container) {
+    public void onInitialize() {
         GMObjects.register();
         GMEntityTypes.register();
         Registry.register(Registries.BLOCK_ENTITY_TYPE, "golemancy:soul_grafter", SOUL_GRAFTER_ENTITY);

@@ -4,7 +4,6 @@ import net.emirikol.golemancy.entity.AbstractGolemEntity;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemStack;
@@ -29,7 +28,7 @@ public class GolemMoveToFishGoal extends GolemMoveGoal {
 
     public GolemMoveToFishGoal(AbstractGolemEntity entity, float maxYDifference) {
         super(entity, maxYDifference);
-        this.setControls(EnumSet.of(Goal.Control.MOVE, Goal.Control.LOOK));
+        this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
     }
 
     @Override
@@ -62,7 +61,7 @@ public class GolemMoveToFishGoal extends GolemMoveGoal {
     public boolean isTargetPos(BlockPos pos) {
         ServerWorld world = (ServerWorld) this.entity.getWorld();
         FluidState fluidState = world.getBlockState(pos).getFluidState();
-        return (fluidState.getFluid() == Fluids.WATER) && fluidState.isSource() && !fluidState.isEmpty() && super.isTargetPos(pos);
+        return (fluidState.getFluid() == Fluids.WATER) && fluidState.isStill() && !fluidState.isEmpty() && super.isTargetPos(pos);
     }
 
     @Override
@@ -92,7 +91,7 @@ public class GolemMoveToFishGoal extends GolemMoveGoal {
                 .add(LootContextParameters.ORIGIN, originPos)
                 .add(LootContextParameters.TOOL, stack)
                 .add(LootContextParameters.THIS_ENTITY, this.entity)
-                .withLuck(this.entity.getLuckFromSmarts() + EnchantmentHelper.getLuckOfTheSea(stack)); //Each level of Smarts adds 1 point of luck.
+                .luck(this.entity.getLuckFromSmarts() + EnchantmentHelper.getLuckOfTheSea(stack)); //Each level of Smarts adds 1 point of luck.
         LootTable lootTable = world.getServer().getLootManager().getLootTable(LootTables.FISHING_GAMEPLAY);
         List<ItemStack> list = lootTable.generateLoot(builder.build(LootContextTypes.FISHING));
         for (ItemStack fishy : list) {

@@ -25,7 +25,7 @@ public class GolemFollowOwnerGoal extends Goal {
         this.speed = speed;
         this.navigation = this.entity.getNavigation();
         this.minDistance = minDistance;
-        this.setControls(EnumSet.of(Goal.Control.MOVE));
+        this.setControls(EnumSet.of(Control.MOVE));
         if (!(this.entity.getNavigation() instanceof MobNavigation) && !(this.entity.getNavigation() instanceof BirdNavigation)) {
             throw new IllegalArgumentException("Unsupported mob type for GolemFollowOwnerGoal");
         }

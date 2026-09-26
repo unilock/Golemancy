@@ -21,7 +21,7 @@ public class GolemMoveGoal extends Goal {
         this.entity = entity;
         this.maxYDifference = maxYDifference;
         this.failedTargets = new ArrayList<>();
-        this.setControls(EnumSet.of(Goal.Control.MOVE));
+        this.setControls(EnumSet.of(Control.MOVE));
     }
 
     public boolean canStart() {
@@ -67,7 +67,7 @@ public class GolemMoveGoal extends Goal {
     }
 
     @Override
-    public boolean requiresUpdateEveryTick() {
+    public boolean shouldRunEveryTick() {
         return true;
     }
 

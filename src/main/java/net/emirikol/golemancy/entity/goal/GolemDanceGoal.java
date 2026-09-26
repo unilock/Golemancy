@@ -19,7 +19,7 @@ public class GolemDanceGoal extends Goal {
 
     public GolemDanceGoal(AbstractGolemEntity entity) {
         this.entity = entity;
-        this.setControls(EnumSet.of(Goal.Control.MOVE, Goal.Control.LOOK));
+        this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
     }
 
     public boolean canStart() {
@@ -54,7 +54,7 @@ public class GolemDanceGoal extends Goal {
         float r = searchRadius + (searchRadius * entity.getGolemSmarts());
         for (BlockPos curPos : BlockPos.iterateOutwards(pos, (int) r, (int) r, (int) r)) {
             if (world.getBlockEntity(curPos) instanceof JukeboxBlockEntity jukebox) {
-                if (!jukebox.getItem().isEmpty() && (jukebox.getItem().getItem() instanceof MusicDiscItem)) {
+                if (!jukebox.getStack().isEmpty() && (jukebox.getStack().getItem() instanceof MusicDiscItem)) {
                     this.targetPos = curPos;
                     return true;
                 }
